@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <title>{% block title %}Activité extra-scolaire {% endblock %}</title>
+</head>
+<body>
+    <header>
+        {%  include "commons/nav.html.twig" %}
+    </header>
+    <main>
+        {% block main %} {% endblock %}
+    </main>
+    <script src="{{ asset('assets/js/bootstapminjs') }}"></script>
+</body>
+</html>
