@@ -4,16 +4,22 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-autoclear">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('sign_in') }}">S'inscrire</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('sign_up') }}">Se connecter</a>
-            </li>
+        <ul class="navbar-nav ml-auto">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('user_register') }}">S'inscrire</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('login') }}">Se connecter</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

@@ -5,8 +5,8 @@
     <div class="container-fluid">
         <!-- Bloc date + identifiant user connecter -->
         <div class="offset-9 col-3">
-            <p class="">Date du jour : 19/07/2018</p>
-            <p class="">Participant: Jeanine L.</p>
+            <p class="">Date du jour : {{ date.format('d/m/Y') }}</p>
+            <p class="">Participant: {{ user.prenom }} {{ user.nom }}</p>
         </div>
         <!-- Bloc recherche -->
         <div class="col-12 d-flex flex-row">
@@ -16,8 +16,10 @@
                 <div class="form-group d-flex flex-row">
                     <label for="campus" class="col-4">Campus</label>
                     <select id="campus" class="form-control offset-1 col-7">
-                        <option>Saint Herblain</option>
-                        <option>Niort</option>
+                        <option id="campus-0">Tout les campus</option>
+                        {% for campus in campus %}
+                            <option id="campus-{{ campus.id }}">{{ campus.nom }}</option>
+                        {% endfor %}
                     </select>
                 </div>
 
@@ -78,26 +80,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-light">
-                    <td class="border-right">Philo</td>
-                    <td class="border-right">19/07/2018 23:45</td>
-                    <td class="border-right">19/07/2018</td>
-                    <td class="border-right">8/8</td>
-                    <td class="border-right">En cours</td>
-                    <td class="border-right">X</td>
-                    <td class="border-right">Spinoz A.</td>
-                    <td class="border-right">Afficher</td>
-                </tr>
-                <tr>
-                    <td class="border-right">Origamie</td>
-                    <td class="border-right">21/07/2018 20h00</td>
-                    <td class="border-right">18/07/2018</td>
-                    <td class="border-right">3/5</td>
-                    <td class="border-right">Fermé</td>
-                    <td class="border-right"></td>
-                    <td class="border-right">Rémi S.</td>
-                    <td class="border-right">Afficher</td>
-                </tr>
+                {% for sortie in sorties %}
+                    <tr>
+                        <td class="border-right">{{ sortie.nom }}</td>
+                        <td class="border-right">{{  sortie.dateHeureDebut }}</td>
+                        <td class="border-right">{{ sortie.dateLimiteInscription | format('d/mm/Y') }}</td>
+                        <td class="border-right">{{ sortie.nbInscriptionMax }}</td>
+                        <td class="border-right"></td>
+                        <td class="border-right"></td>
+                        <td class="border-right">{{  sortie.organisateur }}</td>
+                        <td class="border-right">Afficher</td>
+                    </tr>
+                {% endfor %}
+                {% if sorties == null %}
+                    <tr>
+                        <td colspan="8" class="text-center">Aucune sorties ne correspondent aux critères de recherche</td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
         <button class="btn btn-secondary" id="btn-create">Créer une sortie</button>

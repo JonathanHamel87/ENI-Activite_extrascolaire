@@ -5,11 +5,12 @@ namespace App\Entity;
 use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant
+class Participant implements UserInterface
 {
     /**
      * @ORM\Id
@@ -17,6 +18,11 @@ class Participant
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=30, name="pseudo", unique=true)
+     */
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -34,14 +40,14 @@ class Participant
     private $telephone;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=255)
      */
     private $mail;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=255, name="motPasse")
      */
-    private $motPasse;
+    private $password;
 
     /**
      * @ORM\Column(type="boolean")
@@ -68,6 +74,8 @@ class Participant
      */
     private $sortiesOrganisee;
 
+    private $roles;
+
     /**
      * Participant constructor.
      */
@@ -82,6 +90,23 @@ class Participant
     {
         return $this->id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username): void
+    {
+        $this->username = $username;
+    }
+
 
     /**
      * @return mixed
@@ -150,17 +175,17 @@ class Participant
     /**
      * @return mixed
      */
-    public function getMotPasse()
+    public function getPassword()
     {
-        return $this->motPasse;
+        return $this->password;
     }
 
     /**
-     * @param mixed $motPasse
+     * @param mixed $password
      */
-    public function setMotPasse($motPasse): void
+    public function setPassword($password): void
     {
-        $this->motPasse = $motPasse;
+        $this->password = $password;
     }
 
     /**
@@ -243,9 +268,14 @@ class Participant
         $this->sortiesOrganisee = $sortiesOrganisee;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return ["ROLE_USER"];
+    }
 
-
-
-
-
+    public function getSalt(){return null;}
+    public function eraseCredentials(){}
 }
