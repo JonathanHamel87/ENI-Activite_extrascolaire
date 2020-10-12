@@ -2,8 +2,24 @@
 
 {% block title %} Registration {% endblock %}
 {% block main %}
-    {{  form_start(registerForm) }}
-    {{ form_widget(registerForm) }}
-    <button class="btn btn-success" type="submit">Register</button>
+    {{  form_start(registerForm, {'method': 'POST'}) }}
+        <div>
+            {{ form_row(registerForm.username) }}
+        </div>
+        <div>
+            {{ form_row(registerForm.nom) }}
+        </div>
+        <div>
+            {{ form_row(registerForm.prenom) }}
+        </div>
+        <div>
+            {{ form_row(registerForm.mail) }}
+        </div>
+        <div>
+            {{ form_row(registerForm.password.first) }}
+            {{ form_row(registerForm.password.second) }}
+        </div>
+
+        <button class="btn btn-success" type="submit">Register</button>
     {{ form_end(registerForm) }}
 {% endblock %}

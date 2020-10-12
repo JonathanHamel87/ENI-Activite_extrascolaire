@@ -6,6 +6,7 @@ use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
@@ -84,6 +85,22 @@ class Participant implements UserInterface
         $this->sorties = new ArrayCollection();
         $this->sortiesOrganisee = new ArrayCollection();
     }
+
+    /**
+     * @ORM\Column(type="text", length=255, nullable=true)
+     */
+    private $file;
+
+
+    /**
+     * @Assert\File(
+     *     maxSize="2Mi",
+     *  uploadErrorMessage="Le fichier n'a pas été correctement téléchargé",
+     *     maxSizeMessage="Le fichier est trop lourd",
+     *     )
+     *
+     */
+    private $fileTemp;
 
 
     public function getId(): ?int
@@ -275,6 +292,40 @@ class Participant implements UserInterface
     {
         return ["ROLE_USER"];
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param mixed $file
+     */
+    public function setFile($file): void
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFileTemp()
+    {
+        return $this->fileTemp;
+    }
+
+    /**
+     * @param mixed $fileTemp
+     */
+    public function setFileTemp($fileTemp): void
+    {
+        $this->fileTemp = $fileTemp;
+    }
+
+
 
     public function getSalt(){return null;}
     public function eraseCredentials(){}

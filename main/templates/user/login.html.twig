@@ -2,13 +2,29 @@
 
 {% block title %} Sign Up {% endblock %}
 {% block main %}
-    <form action="" method="post">
-        <label for="username">Pseudo :</label>
-        <input type="text" name="_username" id="username">
+    <section class="d-flex justify-content-center min-vh-section">
+        <form action="" method="post" class="h-100 m-auto w-25 rounded">
+            <div class="form-row ml-2 mt-2">
+                <label for="username" class="col-4 col-form-label">Pseudo :</label>
+                <input type="text" name="_username" id="username" class="col-6 form-control">
+            </div>
 
-        <label for="password">Mot de passe :</label>
-        <input type="password" name="_password" id="password">
+            <div class="form-row ml-2 mt-2">
+                <label for="password" class="col-4 col-form-label">Mot de passe :</label>
+                <input type="password" name="_password" id="password" class="col-6 form-control">
+            </div>
 
-        <button class="btn btn-success" type="submit">Login</button>
-    </form>
+            <div class="form-row ml-2 mt-2">
+                <button class="btn btn-success col-4 mt-2 mb-2" type="submit">Connexion</button>
+                <div class="d-flex flex-column justify-content-center m-auto col-6">
+                    <div class="form-check-inline">
+                        <input type="checkbox" id="se-souvenir" name="se-souvenir" class="form-check-input mt-1">
+                        <label for="se-souvenir" class="form-check-label">Se souvenir de moi</label>
+                    </div>
+                    <a class="alert-link" id="lost-password">Mot de passe oublié</a>
+                </div>
+            </div>
+
+        </form>
+    </section>
 {% endblock %}

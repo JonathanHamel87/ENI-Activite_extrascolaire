@@ -1,0 +1,19 @@
+#btn-create{
+    margin-top: .5rem;
+}
+.min-vh-section{
+    min-height: 94.1vh!important;
+}
+figure {
+    border: thin #c0c0c0 solid;
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+    max-width: 220px;
+    margin: auto;
+}
+
+img {
+    max-width: 50%;
+    max-height: 50%;
+}

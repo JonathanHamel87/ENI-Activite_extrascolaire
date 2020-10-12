@@ -2,73 +2,53 @@
 
 {% block title %} Profil {% endblock %}
 {% block main %}
-    <section class="col-12 d-flex flex-row">
-        <div class="col-4">
-            image
-        </div>
-        <form class="col-4 d-flex flex-column justify-content-center" action="" method="post">
-            <h3 class="col-12 text-center mt-3 mb-3">Mon profil</h3>
-            <!-- Pseudo -->
-            <div class="col-12 mt-2">
-                <label for="username" class="col-3">Pseudo :</label>
-                <input type="text" name="username" id="username" class="col-6">
-            </div>
+        <h3 class="col-12 text-center mt-5">Mon Profil</h3>
+        <section class="d-flex flex-row">
+                <div class="col-2 offset-1">
+                        <figure>
+                                <img class="col-12" src="{{ source }}" alt="profil"/>
+                        </figure>
+                </div>
 
-            <!-- FirstName -->
-            <div class="col-12 mt-2">
-                <label for="firstname" class="col-3">Prénom :</label>
-                <input type="text" name="firstname" id="firstname" class="col-6">
-            </div>
+                {{ form_start(profilForm, {'attr': {'class': 'min-vh-section mt-5 col-7'}}) }}
+                        <div class="offset-3 col-6 mt-2">
+                                {{ form_row(profilForm.username, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                        </div>
 
-            <!-- LastName -->
-            <div class="col-12 mt-2">
-                <label for="lastname" class="col-3">Nom :</label>
-                <input type="text" name="lastname" id="lastname" class="col-6">
-            </div>
+                        <div class="offset-3 col-6 mt-2">
+                                {{ form_row(profilForm.nom, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                        </div>
 
-            <!-- Phone -->
-            <div class="col-12 mt-2">
-                <label for="phone" class="col-3">Téléphone :</label>
-                <input type="text" name="phone" id="phone" class="col-6">
-            </div>
+                        <div class="offset-3 col-6 mt-2">
+                                {{ form_row(profilForm.prenom, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                        </div>
 
-            <!-- Email -->
-            <div class="col-12 mt-2">
-                <label for="email" class="col-3">Email :</label>
-                <input type="email" name="email" id="email" class="col-6">
-            </div>
+                        <div class="offset-3 col-6 mt-2">
+                                {{ form_row(profilForm.telephone, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                        </div>
 
-            <!-- Password -->
-            <div class="col-12 mt-2">
-                <label for="password" class="col-3">Mot de passe :</label>
-                <input type="password" name="password" id="password" class="col-6">
-            </div>
+                        <div class="offset-3 col-6 mt-2">
+                                {{ form_row(profilForm.mail, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                        </div>
 
-            <!-- Password Confirm -->
-            <div class="col-12 mt-2">
-                <label for="password2" class="col-3">Confirmation :</label>
-                <input type="password" name="password2" id="password2" class="col-6">
-            </div>
+                        <div class="offset-3 col-6 mt-2">
+                                {{ form_row(profilForm.password.first, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                        </div>
+                        <div class="offset-3 col-6 mt-2">
+                                {{ form_row(profilForm.password.second, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                        </div>
+                        <div class="offset-3 col-6 mt-2">
+                                {{ form_row(profilForm.campus, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                        </div>
 
-            <!-- Campus -->
-            <div class="col-12 mt-2">
-                <label for="campus" class="col-3">Campus :</label>
-                <select name="campus" id="campus" class="col-6">
-                    <option></option>
-                </select>
-            </div>
+                        <div class="offset-3 col-6 mt-2 d-flex flex-row">
+                                {{ form_row(profilForm.photo, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}</div>
+                        </div>
 
-            <!-- Picture -->
-            <div class="col-12 mt-2">
-                <label for="picture" class="col-3">Ma photo :</label>
-                <button id="picture" class="col-6">Télécharger vers le serveur</button>
-            </div>
-
-            <!-- Button menu -->
-            <div id="button-menu" class="offset-2 col-6 d-flex flex-row justify-content-between mt-3">
-                <button class="btn btn-success">Enregistrer</button>
-                <button class="btn btn-primary">Annuler</button>
-            </div>
-        </form>
-    </section>
+                        <div class="offset-3 col-6 d-flex justify-content-around mt-2">
+                                {{ form_widget(profilForm.enregistrer, {'attr': {'class': 'btn btn-success'}}) }}
+                                {{ form_widget(profilForm.annuler, {'attr': {'class': 'btn btn-primary'}}) }}
+                        </div>
+                {{ form_end(profilForm) }}
+        </section>
 {% endblock %}

@@ -58,11 +58,13 @@
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/http-kernel" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/intl" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/maker-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/mime" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/monolog-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/monolog-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/options-resolver" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/polyfill-intl-grapheme" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/polyfill-intl-icu" />
+      <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/polyfill-intl-idn" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/polyfill-intl-normalizer" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/polyfill-mbstring" />
       <excludeFolder url="file://$MODULE_DIR$/main/vendor/symfony/polyfill-php73" />

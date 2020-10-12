@@ -1,0 +1,80 @@
+{%  extends 'layout.html.twig' %}
+
+{% block title %} Profil {% endblock %}
+{% block main %}
+    <section class="col-12 d-flex flex-row">
+        <div class="col-4">
+            image
+        </div>
+        <form class="col-4 d-flex flex-column justify-content-center" action="" method="post">
+            <h3 class="col-12 text-center mt-3 mb-3">Mon profil</h3>
+            <!-- Pseudo -->
+            <div class="col-12 mt-2">
+                <label for="username" class="col-3">Pseudo :</label>
+                <input type="text" name="username" id="username" class="col-6" value="{{ user.username }}">
+            </div>
+
+            <!-- FirstName -->
+            <div class="col-12 mt-2">
+                <label for="firstname" class="col-3">Prénom :</label>
+                <input type="text" name="firstname" id="firstname" class="col-6" value="{{ user.prenom }}">
+            </div>
+
+            <!-- LastName -->
+            <div class="col-12 mt-2">
+                <label for="lastname" class="col-3">Nom :</label>
+                <input type="text" name="lastname" id="lastname" class="col-6" value="{{ user.nom }}">
+            </div>
+
+            <!-- Phone -->
+            <div class="col-12 mt-2">
+                <label for="phone" class="col-3">Téléphone :</label>
+                <input type="text" name="phone" id="phone" class="col-6" value="{{ user.telephone }}">
+            </div>
+
+            <!-- Email -->
+            <div class="col-12 mt-2">
+                <label for="email" class="col-3">Email :</label>
+                <input type="email" name="email" id="email" class="col-6" value="{{ user.mail }}">
+            </div>
+
+            <!-- Password -->
+            <div class="col-12 mt-2">
+                <label for="password" class="col-3">Mot de passe :</label>
+                <input type="password" name="password" id="password" class="col-6" value="{{ user.password }}">
+            </div>
+
+            <!-- Password Confirm -->
+            <div class="col-12 mt-2">
+                <label for="password2" class="col-3">Confirmation :</label>
+                <input type="password" name="password2" id="password2" class="col-6">
+            </div>
+
+            <!-- Campus -->
+            <div class="col-12 mt-2">
+                <label for="campus" class="col-3">Campus :</label>
+                <select name="campus" id="campus" class="col-6">
+                    {% for campus in campus %}
+                        {% if campus == user.campus %}
+                            <option id="campus-{{ campus.id }}" selected>{{ campus.nom }}</option>
+                        {% else %}
+                            <option id="campus-{{ campus.id }}">{{ campus.nom }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Picture -->
+            <div class="col-12 mt-2">
+                <label for="picture" class="col-3">Ma photo :</label>
+                <button id="picture" class="col-6">Télécharger vers le serveur</button>
+            </div>
+
+            <!-- Button menu -->
+            <div id="button-menu" class="offset-2 col-6 d-flex flex-row justify-content-between mt-3">
+                <button class="btn btn-success">Enregistrer</button>
+                <button class="btn btn-primary">Annuler</button>
+            </div>
+        </form>
+    </section>
+{% endblock %}
