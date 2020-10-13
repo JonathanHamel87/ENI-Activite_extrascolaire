@@ -4,9 +4,6 @@ namespace App\Form;
 
 use App\Entity\Campus;
 use App\Entity\Participant;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\Entity;
-use PhpParser\Node\Scalar\MagicConst\File;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;

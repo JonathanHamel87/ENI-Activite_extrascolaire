@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Campus;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\ListSortieType;
 use App\Form\ProfilType;
+use App\Model\ListSortie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,30 +26,46 @@ class MainController extends AbstractController
     /**
      * @Route("", name="home")
      */
-    public function home(EntityManagerInterface $em, UserInterface $user)
+    public function home(EntityManagerInterface $em, UserInterface $user, Request $request)
     {
         /* Récupération de la liste des campus */
-        $campusRepo = $em->getRepository(Campus::class);
+        /*$campusRepo = $em->getRepository(Campus::class);
         $campus = $campusRepo->findAll();
 
         /* Récupération de la liste des sorties */
-        $sortieRepo = $em->getRepository(Sortie::class);
+        /*$sortieRepo = $em->getRepository(Sortie::class);
         $sorties = $sortieRepo->findAll();
 
         /* Date du jour */
         $date = new \DateTime();
+
+        /* Liste des sorties */
+        $sortieRepo = $em->getRepository(Sortie::class);
+        $listeSortie = new ListSortie();
 
         /* Utilisateur connecté */
         $participantRepo = $em->getRepository(Participant::class);
         $participant = $participantRepo->findByUsername($user->getUsername());
         $user = $participant[0];
 
+        /* Formulaire listeSortie */
+        $listeSortieForm = $this->createForm(ListSortieType::class, $listeSortie);
+        $listeSortieForm->handleRequest($request);
+
+        if ($listeSortieForm->isSubmitted() && $listeSortieForm->isValid()){
+
+            //$sorties = $sortieRepo->findByFilter('test');
+            $sorties = $sortieRepo->findAll();
+
+            $listeSortie->setSorties($sorties);
+            dump($listeSortie);
+        }
 
         return $this->render("main/home.html.twig", [
-            "campus" => $campus,
-            "date" => $date,
             "user" => $user,
-            "sorties" => $sorties
+            "date" => $date,
+            "listSortieForm" => $listeSortieForm->createView()
+
         ]);
     }
 

@@ -19,6 +19,17 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    public function findByFilter($value){
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.nom = :val')
+            ->setParameter('val', $value)
+            ->orderBy('s.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */
