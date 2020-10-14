@@ -6,7 +6,6 @@ use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\ListSortieType;
 use App\Form\ProfilType;
-use App\Model\ListSortie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,15 +32,11 @@ class MainController extends AbstractController
         $campus = $campusRepo->findAll();
 
         /* Récupération de la liste des sorties */
-        /*$sortieRepo = $em->getRepository(Sortie::class);
+        $sortieRepo = $em->getRepository(Sortie::class);
         $sorties = $sortieRepo->findAll();
 
         /* Date du jour */
         $date = new \DateTime();
-
-        /* Liste des sorties */
-        $sortieRepo = $em->getRepository(Sortie::class);
-        $listeSortie = new ListSortie();
 
         /* Utilisateur connecté */
         $participantRepo = $em->getRepository(Participant::class);
@@ -49,22 +44,23 @@ class MainController extends AbstractController
         $user = $participant[0];
 
         /* Formulaire listeSortie */
-        $listeSortieForm = $this->createForm(ListSortieType::class, $listeSortie);
+        $listeSortieForm = $this->createForm(ListSortieType::class);
         $listeSortieForm->handleRequest($request);
 
+
+        /* Soumission formulaire */
         if ($listeSortieForm->isSubmitted() && $listeSortieForm->isValid()){
+            $sortieRepo = $em->getRepository(Sortie::class);
 
-            //$sorties = $sortieRepo->findByFilter('test');
-            $sorties = $sortieRepo->findAll();
-
-            $listeSortie->setSorties($sorties);
-            dump($listeSortie);
+            $sorties = $sortieRepo->findByFilter($listeSortieForm->get('nomSortie')->getViewData());
         }
+
 
         return $this->render("main/home.html.twig", [
             "user" => $user,
             "date" => $date,
-            "listSortieForm" => $listeSortieForm->createView()
+            "listSortieForm" => $listeSortieForm->createView(),
+            "sorties" => $sorties
 
         ]);
     }
@@ -155,4 +151,5 @@ class MainController extends AbstractController
             $this->addFlash('warning', 'Une erreur est arrivée' );
         }
     }
+
 }

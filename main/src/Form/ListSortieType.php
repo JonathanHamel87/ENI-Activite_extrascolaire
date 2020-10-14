@@ -93,11 +93,9 @@ class ListSortieType extends AbstractType
             ->add('creerSortie', ButtonType::class, [
                 'label' => 'Créer une sortie',
                 'attr' => array(
-                    'class' => 'btn btn-secondary'
+                    'class' => 'btn btn-secondary',
+                    'id' => 'create-sortie',
                 )
-            ])
-            ->add('sorties', CollectionType::class,[
-                'entry_type' => Sortie::class,
             ])
         ;
     }

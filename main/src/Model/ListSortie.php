@@ -22,8 +22,6 @@ class ListSortie
 
     private $bFini;
 
-    private $sorties;
-
     /**
      * @return mixed
      */
@@ -150,22 +148,6 @@ class ListSortie
     public function setBFini($bFini): void
     {
         $this->bFini = $bFini;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSorties()
-    {
-        return $this->sorties;
-    }
-
-    /**
-     * @param mixed $sorties
-     */
-    public function setSorties($sorties): void
-    {
-        $this->sorties = $sorties;
     }
 
 

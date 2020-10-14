@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\VilleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,9 +29,19 @@ class Ville
     private $codePostal;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="villes", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="ville", cascade={"remove"})
      */
-    private $lieu;
+    private $lieux;
+
+    /**
+     * Ville constructor.
+     * @param $lieux
+     */
+    public function __construct()
+    {
+        $this->lieux = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -70,18 +81,20 @@ class Ville
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getLieu()
+    public function getLieux(): ArrayCollection
     {
-        return $this->lieu;
+        return $this->lieux;
     }
 
     /**
-     * @param mixed $lieu
+     * @param ArrayCollection $lieux
      */
-    public function setLieu($lieu): void
+    public function setLieux(ArrayCollection $lieux): void
     {
-        $this->lieu = $lieu;
+        $this->lieux = $lieux;
     }
+
+
 }

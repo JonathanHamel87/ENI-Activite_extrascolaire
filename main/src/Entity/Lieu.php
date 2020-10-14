@@ -39,21 +39,23 @@ class Lieu
     private $longitude;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="lieux", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="lieu", cascade={"remove"})
      */
-    private $sortie;
+    private $sorties;
+
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="lieu")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="lieux")
      */
-    private $villes;
+    private $ville;
 
     /**
      * Lieu constructor.
      */
     public function __construct()
     {
-        $this->villes = new ArrayCollection();
+        //$this->villes = new ArrayCollection();
+        $this->sorties = new ArrayCollection();
     }
 
 
@@ -143,34 +145,40 @@ class Lieu
     }
 
     /**
-     * @return ArrayCollection
-     */
-    public function getVilles(): ArrayCollection
-    {
-        return $this->villes;
-    }
-
-    /**
-     * @param ArrayCollection $villes
-     */
-    public function setVilles(ArrayCollection $villes): void
-    {
-        $this->villes = $villes;
-    }
-
-    /**
      * @return mixed
      */
-    public function getSortie()
+    public function getVille()
     {
-        return $this->sortie;
+        return $this->ville;
     }
 
     /**
-     * @param mixed $sortie
+     * @param mixed $ville
      */
-    public function setSortie($sortie): void
+    public function setVille($ville): void
     {
-        $this->sortie = $sortie;
+        $this->ville = $ville;
     }
+
+
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSorties(): ArrayCollection
+    {
+        return $this->sorties;
+    }
+
+    /**
+     * @param ArrayCollection $sorties
+     */
+    public function setSorties(ArrayCollection $sorties): void
+    {
+        $this->sorties = $sorties;
+    }
+
+
+
+
 }

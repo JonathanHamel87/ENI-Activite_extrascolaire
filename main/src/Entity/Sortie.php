@@ -64,9 +64,9 @@ class Sortie
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="sortie")
+     * @ORM\ManyToOne  (targetEntity="App\Entity\Lieu", inversedBy="sorties")
      */
-    private $lieux;
+    private $lieu;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="sorties")
@@ -79,7 +79,7 @@ class Sortie
     public function __construct()
     {
         $this->participants = new ArrayCollection();
-        $this->lieux = new ArrayCollection();
+        //$this->lieux = new ArrayCollection();
     }
 
 
@@ -233,19 +233,19 @@ class Sortie
     }
 
     /**
-     * @return ArrayCollection
+     * @return mixed
      */
-    public function getLieux(): ArrayCollection
+    public function getLieu()
     {
-        return $this->lieux;
+        return $this->lieu;
     }
 
     /**
-     * @param ArrayCollection $lieux
+     * @param mixed $lieu
      */
-    public function setLieux(ArrayCollection $lieux): void
+    public function setLieu($lieu): void
     {
-        $this->lieux = $lieux;
+        $this->lieu = $lieu;
     }
 
     /**

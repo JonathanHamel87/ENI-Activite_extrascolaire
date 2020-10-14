@@ -78,6 +78,7 @@
         "symfony": {
             "allow-contrib": false,
             "require": "5.1.*"
-        }
+        },
+        "symfony-assets-install": "symlink"
     }
 }

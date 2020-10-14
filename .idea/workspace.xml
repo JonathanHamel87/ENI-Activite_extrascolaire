@@ -19,15 +19,28 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee893464-c375-458a-91bc-2edb6a9d6993" name="Default Changelist" comment="- Modification de la page profil pour remplacer le formulaire par un Form&#10;- Mise en place de la modification du profil&#10;- Mise en place de l'upload de la photo de profil&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form">
-      <change afterPath="$PROJECT_DIR$/main/src/Form/ListSortieType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/src/Model/ListSortie.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/templates/main/homeOLD.html.twig" afterDir="false" />
+    <list default="true" id="ee893464-c375-458a-91bc-2edb6a9d6993" name="Default Changelist" comment="- Page home presque fonctionnelle, soucis au niveau de la liste des sorties&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form">
+      <change afterPath="$PROJECT_DIR$/main/public/js/eventListener.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/public/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/src/Controller/SortieController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/src/Form/SortieAddType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/src/Form/SortieViewType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/sortie/addSortie.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/sortie/sortie.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/sortie/updateSortie.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Sortir-com.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Sortir-com.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/main/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/main/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/Form/ProfilType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/ProfilType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/Repository/SortieRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Repository/SortieRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Entity/Lieu.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Lieu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Entity/Sortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Sortie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Entity/Ville.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Ville.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Form/ListSortieType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/ListSortieType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Model/ListSortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Model/ListSortie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/layout.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/home.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/user/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/user/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +51,21 @@
     <pharConfigPath>$PROJECT_DIR$/main/composer.json</pharConfigPath>
     <execution />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -144,20 +170,23 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/main/templates/main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/main/public/js/jquery.min.js" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\Sortir-com\main\public" />
+      <recent name="C:\wamp64\www\Sortir-com\main\public\assets" />
+      <recent name="C:\wamp64\www\Sortir-com\main\public\css" />
+      <recent name="C:\wamp64\www\Sortir-com\main\templates\main" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\Sortir-com\main\public\assets" />
       <recent name="C:\wamp64\www\Sortir-com\main\templates\main" />
       <recent name="C:\wamp64\www\Sortir-com\main\templates\user" />
       <recent name="C:\wamp64\www\Sortir-com\main\public\css" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\Sortir-com\main\public" />
-      <recent name="C:\wamp64\www\Sortir-com\main\public\css" />
-      <recent name="C:\wamp64\www\Sortir-com\main\templates\main" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -173,7 +202,8 @@
       <workItem from="1602161130584" duration="5461000" />
       <workItem from="1602228842228" duration="7322000" />
       <workItem from="1602482455252" duration="26273000" />
-      <workItem from="1602569675178" duration="5359000" />
+      <workItem from="1602569675178" duration="20451000" />
+      <workItem from="1602654880384" duration="19473000" />
     </task>
     <task id="LOCAL-00001" summary="- Création de la vue profil.html.twig&#10;- Mise en place du formulaire&#10;&#10;Travail suivant :&#10;- Animer le formulaire de profil.html.twig&#10;- Ajouter le système d'image&#10;- Mettre en place la méthode Post">
       <created>1601995663588</created>
@@ -189,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602502953135</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="- Page home presque fonctionnelle, soucis au niveau de la liste des sorties&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form">
+      <created>1602575350993</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602575350993</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +248,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="- Création de la vue profil.html.twig&#10;- Mise en place du formulaire&#10;&#10;Travail suivant :&#10;- Animer le formulaire de profil.html.twig&#10;- Ajouter le système d'image&#10;- Mettre en place la méthode Post" />
     <MESSAGE value="- Modification de la page profil pour remplacer le formulaire par un Form&#10;- Mise en place de la modification du profil&#10;- Mise en place de l'upload de la photo de profil&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Modification de la page profil pour remplacer le formulaire par un Form&#10;- Mise en place de la modification du profil&#10;- Mise en place de l'upload de la photo de profil&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form" />
+    <MESSAGE value="- Page home presque fonctionnelle, soucis au niveau de la liste des sorties&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Page home presque fonctionnelle, soucis au niveau de la liste des sorties&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form" />
   </component>
   <component name="WindowStateProjectService">
     <state x="770" y="403" key="#Composer" timestamp="1601907347419">
@@ -222,25 +260,32 @@
       <screen x="0" y="0" width="1920" height="1048" />
     </state>
     <state x="552" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1601996218167" />
-    <state x="753" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1602510695532">
+    <state x="753" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1602681077806">
       <screen x="0" y="0" width="1920" height="1048" />
     </state>
-    <state x="753" y="233" key="#com.intellij.ide.util.MemberChooser/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602510695532" />
-    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602233836944">
+    <state x="753" y="233" key="#com.intellij.ide.util.MemberChooser/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602681077806" />
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602666292330">
       <screen x="0" y="0" width="1920" height="1048" />
     </state>
-    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602233836944" />
-    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1601987913973">
-      <screen x="0" y="0" width="1920" height="1048" />
+    <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602593340930" />
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602666292330" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1602590507614">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602590507614" />
     <state x="740" y="279" key="FileChooserDialogImpl/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1601987913973" />
     <state x="754" y="247" key="NewPhpClassDialog" timestamp="1602503203357">
       <screen x="0" y="0" width="1920" height="1048" />
     </state>
     <state x="754" y="247" key="NewPhpClassDialog/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602503203357" />
-    <state x="552" y="257" key="Vcs.Push.Dialog.v2" timestamp="1602502957081">
-      <screen x="0" y="0" width="1920" height="1048" />
+    <state x="0" y="161" key="SettingsEditor" timestamp="1602592746589">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
+    <state x="0" y="161" key="SettingsEditor/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602592746589" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1602575481867">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602575481867" />
     <state x="552" y="257" key="Vcs.Push.Dialog.v2/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602502957081" />
     <state x="738" y="425" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1601995558338">
       <screen x="0" y="0" width="1920" height="1048" />

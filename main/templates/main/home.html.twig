@@ -58,14 +58,41 @@
 
             </thead>
             <tbody>
-                <tr>
-                    {% for sortie in listSortieForm.sorties %}
-                        {{ dump(form_row(sortie)) }}
-                    {% endfor %}
-                    {{ dump(form_row(listSortieForm.sorties)) }}
-                </tr>
+                {% for sortie in sorties %}
+                    <tr>
+                        <td>{{ sortie.nom }}</td>
+                        <td>{{ sortie.dateHeureDebut|date("m/d/Y") }}</td>
+                        <td>{{ sortie.dateLimiteInscription|date("m/d/Y") }}</td>
+                        <td>/{{ sortie.nbInscriptionMax }}</td>
+                        <td>{{ sortie.etat.libelle }}</td>
+                        <td>inscrit</td>
+                        <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|first }}.</td>
+                        <td>
+                            {% if sortie.organisateur == user %}
+                                <a class="" href="{{ path('sortie_update', {'id': sortie.id})  }}">Modifier</a>
+                                <a class="" href="{{ path('home', {'id': sortie.id})  }}">Annuler</a>
+                                {% if sortie.etat.id == 1 %}
+                                    <a class="" href="{{ path('home', {'id': sortie.id})  }}">Publier</a>
+                                {% endif %}
+                            {% else %}
+                                <a class="" href="{{ path('home', {'id': sortie.id})  }}">Se désister</a>
+                                <a class="" href="{{ path('home', {'id': sortie.id})  }}">S'inscrire</a>
+                            {% endif %}
+                            <a class="" href="{{ path('sortie_view', {'id': sortie.id})  }}">Afficher</a>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
+        {{ form_row(listSortieForm.creerSortie) }}
         {{ form_end(listSortieForm) }}
     </div>
 {% endblock %}
+{% block javascripts_footer %}
+    {{ parent() }}
+    <script src="{{ asset('js/eventListener.js') }}"></script>
+{% endblock %}
+
+
+
+
