@@ -19,6 +19,14 @@ class EtatRepository extends ServiceEntityRepository
         parent::__construct($registry, Etat::class);
     }
 
+    public function findByLibelle($libelle){
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.libelle = :val')
+            ->setParameter('val', $libelle)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Etat[] Returns an array of Etat objects
     //  */
@@ -31,7 +39,7 @@ class EtatRepository extends ServiceEntityRepository
             ->orderBy('e.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
+
         ;
     }
     */

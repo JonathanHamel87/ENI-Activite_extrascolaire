@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LieuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,13 +40,13 @@ class Lieu
     private $longitude;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="lieu", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="lieu", orphanRemoval=true)
      */
     private $sorties;
 
-
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="lieux")
+     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="lieux")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $ville;
 
@@ -54,7 +55,6 @@ class Lieu
      */
     public function __construct()
     {
-        //$this->villes = new ArrayCollection();
         $this->sorties = new ArrayCollection();
     }
 
@@ -129,56 +129,47 @@ class Lieu
     }
 
     /**
-     * @return mixed
+     * @return Collection|Sortie[]
      */
-    public function getCampus()
-    {
-        return $this->campus;
-    }
-
-    /**
-     * @param mixed $campus
-     */
-    public function setCampus($campus): void
-    {
-        $this->campus = $campus;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVille()
-    {
-        return $this->ville;
-    }
-
-    /**
-     * @param mixed $ville
-     */
-    public function setVille($ville): void
-    {
-        $this->ville = $ville;
-    }
-
-
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSorties(): ArrayCollection
+    public function getSorties(): Collection
     {
         return $this->sorties;
     }
 
-    /**
-     * @param ArrayCollection $sorties
-     */
-    public function setSorties(ArrayCollection $sorties): void
+    public function addSorty(Sortie $sorty): self
     {
-        $this->sorties = $sorties;
+        if (!$this->sorties->contains($sorty)) {
+            $this->sorties[] = $sorty;
+            $sorty->setLieu($this);
+        }
+
+        return $this;
     }
 
+    public function removeSorty(Sortie $sorty): self
+    {
+        if ($this->sorties->contains($sorty)) {
+            $this->sorties->removeElement($sorty);
+            // set the owning side to null (unless already changed)
+            if ($sorty->getLieu() === $this) {
+                $sorty->setLieu(null);
+            }
+        }
 
+        return $this;
+    }
+
+    public function getVille(): ?Ville
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?Ville $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
 
 
 }

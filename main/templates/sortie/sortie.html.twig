@@ -17,36 +17,36 @@
         {{ form_row(sortieForm.lieu) }}
         <div class="col-12 d-flex flex-row m-0 p-0 border-0 mb-2">
             <label class="col-6" for="">Rue : </label>
-            <input class="col-6" type="text" value="{{ lieu.rue }}"/>
+            <input class="col-6" type="text" value="{{ sortie.lieu.rue }}" disabled/>
         </div>
         <div class="col-12 d-flex flex-row m-0 p-0 border-0 mb-2">
             <label class="col-6" for="">Code postal : </label>
-            <input class="col-6" type="text" value="{{ ville.codePostal }}"/>
+            <input class="col-6" type="text" value="{{ sortie.lieu.ville.codePostal }}" disabled/>
         </div>
         <div class="col-12 d-flex flex-row m-0 p-0 border-0 mb-2">
             <label  class="col-6" for="">Latitude : </label>
-            <input class="col-6" type="text" value="{{ lieu.latitude }}"/>
+            <input class="col-6" type="text" value="{{ sortie.lieu.latitude }}" disabled/>
         </div>
         <div class="col-12 d-flex flex-row m-0 p-0 border-0 mb-2">
             <label class="col-6" for="">Longitude : </label>
-            <input class="col-6" type="text" value="{{ lieu.longitude }}"/>
+            <input class="col-6" type="text" value="{{ sortie.lieu.longitude }}" disabled/>
         </div>
     </div>
     {{ form_end(sortieForm) }}
-    <div>
+    <div class="ml-4">
         <h4>Liste des participants inscrits :</h4>
-        <table class="col-4">
-            <thead>
+        <table class="col-4 overflow-auto border border-dark">
+            <thead class="bg-secondary text-white">
                 <tr>
                     <th>Pseudo</th>
                     <th>Nom</th>
                 </tr>
             </thead>
             <tbody>
-                {% if participants is empty %}
-                    <tr><td colspan="2">Aucun participant</td></tr>
+                {% if sortie.participants is empty %}
+                    <tr><td colspan="2" class="text-center">Aucun participant</td></tr>
                 {% else %}
-                    {% for participant in participants %}
+                    {% for participant in sortie.participants %}
                         <tr>
                             <td>{{ participant.username }}</td>
                             <td>{{ participant.prenom }} {{ participant.nom }}</td>

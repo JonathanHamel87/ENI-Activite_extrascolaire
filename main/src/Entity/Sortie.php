@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,29 +50,35 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Etat", inversedBy="sorties")
-     */
-    private $etat;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Participant", inversedBy="sortiesOrganisee")
-     */
-    private $organisateur;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Participant", mappedBy="sorties", cascade={"remove"})
+     * @ORM\ManyToMany(targetEntity=Participant::class, mappedBy="sorties")
      */
     private $participants;
 
     /**
-     * @ORM\ManyToOne  (targetEntity="App\Entity\Lieu", inversedBy="sorties")
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortie")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organisateur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $etat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $lieu;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="sorties")
-     */
-    private $campus;
+
 
     /**
      * Sortie constructor.
@@ -79,7 +86,6 @@ class Sortie
     public function __construct()
     {
         $this->participants = new ArrayCollection();
-        //$this->lieux = new ArrayCollection();
     }
 
 
@@ -185,82 +191,78 @@ class Sortie
     }
 
     /**
-     * @return mixed
+     * @return Collection|Participant[]
      */
-    public function getEtat()
-    {
-        return $this->etat;
-    }
-
-    /**
-     * @param mixed $etat
-     */
-    public function setEtat($etat): void
-    {
-        $this->etat = $etat;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrganisateur()
-    {
-        return $this->organisateur;
-    }
-
-    /**
-     * @param mixed $organisateur
-     */
-    public function setOrganisateur($organisateur): void
-    {
-        $this->organisateur = $organisateur;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getParticipants(): ArrayCollection
+    public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
-    /**
-     * @param ArrayCollection $participants
-     */
-    public function setParticipants(ArrayCollection $participants): void
+    public function addParticipant(Participant $participant): self
     {
-        $this->participants = $participants;
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->addSorty($this);
+        }
+
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLieu()
+    public function removeParticipant(Participant $participant): self
     {
-        return $this->lieu;
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+            $participant->removeSorty($this);
+        }
+
+        return $this;
     }
 
-    /**
-     * @param mixed $lieu
-     */
-    public function setLieu($lieu): void
+    public function getOrganisateur(): ?Participant
     {
-        $this->lieu = $lieu;
+        return $this->organisateur;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCampus()
+    public function setOrganisateur(?Participant $organisateur): self
+    {
+        $this->organisateur = $organisateur;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
     {
         return $this->campus;
     }
 
-    /**
-     * @param mixed $campus
-     */
-    public function setCampus($campus): void
+    public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
     }
 }

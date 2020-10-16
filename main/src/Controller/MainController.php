@@ -85,7 +85,7 @@ class MainController extends AbstractController
             $photo = $profilForm->get('photo')->getData();
 
             if ($photo){
-                $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                //$originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
                 $newFilename = $user->getId().'.'.$photo->guessExtension();
 
                 try {
@@ -114,12 +114,6 @@ class MainController extends AbstractController
             "profilForm" => $profilForm->createView(),
             "source" => $source
         ]);
-
-
-
-
-
-
         $error=false;
 
 
@@ -140,9 +134,6 @@ class MainController extends AbstractController
                     )
                 );
             }
-
-
-
             $manager->persist($user);
             $manager->flush();
             $this->addFlash('success', 'Votre profil a été modifié avec succès!' );

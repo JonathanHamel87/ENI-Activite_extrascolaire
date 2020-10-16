@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\SortieAddType;
+use App\Form\SortieUpdateType;
 use App\Form\SortieViewType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,13 +36,13 @@ class SortieController extends AbstractController
         $lieuRepo = $em->getRepository(Lieu::class);
         $lieu = $lieuRepo->find($sortieForm->get('lieu')->getViewData());
 
-        $nomVille = $em->getRepository(Ville::class)->find($lieu->getVille());
+        //$nomVille = $em->getRepository(Ville::class)->find($lieu->getVille());
 
-        //$participants = $sortie->getParticipants();
-        $participants = new ArrayCollection();
+        $participants = $sortie->getParticipants();
 
-        $sorties = $sortieRepo->findAll();
-        dump($sorties);
+        dump($sortie->getLieu());
+
+
 
         /* Soumission formulaire */
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
@@ -49,9 +51,7 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/sortie.html.twig', [
             "sortieForm" => $sortieForm->createView(),
-            "lieu" => $lieu,
-            "ville" => $nomVille,
-            "participants" => $participants
+            "sortie" => $sortie,
         ]);
     }
 
@@ -75,10 +75,57 @@ class SortieController extends AbstractController
     /**
      * @Route ("/update/{id}", name="sortie_update")
      */
-    public function updateSortie(EntityManagerInterface $em, $id){
+    public function updateSortie(EntityManagerInterface $em,Request $request, $id){
         $sortieRepo = $em->getRepository(Sortie::class);
         $sortie = $sortieRepo->find($id);
 
-        return $this->render('sortie/updateSortie.html.twig');
+        $sortieForm = $this->createForm(SortieUpdateType::class, $sortie);
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+            $em->persist($sortie);
+            $em->flush();
+        }
+
+        return $this->render('sortie/updateSortie.html.twig', [
+            "sortieForm" => $sortieForm->createView(),
+            "sortie" => $sortie,
+        ]);
+    }
+
+    /**
+     * @Route ("/publier/{id}", name="sortie_publier")
+     */
+    public function publierSortie(EntityManagerInterface $em, $id){
+        $sortieRepo = $em->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($id);
+
+        $etatRepo = $em->getRepository(Etat::class);
+        $etat = $etatRepo->findByLibelle('Ouverte');
+
+        $sortie->setEtat($etat);
+
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route ("/annuler/{id}", name="sortie_annuler")
+     */
+    public function annulerSortie(EntityManagerInterface $em, $id){
+        $sortieRepo = $em->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($id);
+
+        $etatRepo = $em->getRepository(Etat::class);
+        $etat = $etatRepo->findByLibelle('Annulée');
+
+        $sortie->setEtat($etat);
+
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
     }
 }

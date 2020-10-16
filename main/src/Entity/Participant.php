@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -60,21 +61,6 @@ class Participant implements UserInterface
      */
     private $actif;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Campus", inversedBy="participants")
-     */
-    private $campus;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Sortie", inversedBy="participants")
-     */
-    private $sorties;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="organisateur", cascade={"remove"})
-     */
-    private $sortiesOrganisee;
-
     private $roles;
 
     /**
@@ -82,8 +68,9 @@ class Participant implements UserInterface
      */
     public function __construct()
     {
-        $this->sorties = new ArrayCollection();
         $this->sortiesOrganisee = new ArrayCollection();
+        $this->sorties = new ArrayCollection();
+        $this->sortie = new ArrayCollection();
     }
 
     /**
@@ -101,6 +88,23 @@ class Participant implements UserInterface
      *
      */
     private $fileTemp;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants")
+     */
+    private $sorties;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur", orphanRemoval=true)
+     */
+    private $sortie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
 
 
     public function getId(): ?int
@@ -240,54 +244,6 @@ class Participant implements UserInterface
     /**
      * @return mixed
      */
-    public function getCampus()
-    {
-        return $this->campus;
-    }
-
-    /**
-     * @param mixed $campus
-     */
-    public function setCampus($campus): void
-    {
-        $this->campus = $campus;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSorties(): ArrayCollection
-    {
-        return $this->sorties;
-    }
-
-    /**
-     * @param ArrayCollection $sorties
-     */
-    public function setSorties(ArrayCollection $sorties): void
-    {
-        $this->sorties = $sorties;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSortiesOrganisee(): ArrayCollection
-    {
-        return $this->sortiesOrganisee;
-    }
-
-    /**
-     * @param ArrayCollection $sortiesOrganisee
-     */
-    public function setSortiesOrganisee(ArrayCollection $sortiesOrganisee): void
-    {
-        $this->sortiesOrganisee = $sortiesOrganisee;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getRoles()
     {
         return ["ROLE_USER"];
@@ -329,4 +285,73 @@ class Participant implements UserInterface
 
     public function getSalt(){return null;}
     public function eraseCredentials(){}
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSorties(): Collection
+    {
+        return $this->sorties;
+    }
+
+    public function addSorty(Sortie $sorty): self
+    {
+        if (!$this->sorties->contains($sorty)) {
+            $this->sorties[] = $sorty;
+        }
+
+        return $this;
+    }
+
+    public function removeSorty(Sortie $sorty): self
+    {
+        if ($this->sorties->contains($sorty)) {
+            $this->sorties->removeElement($sorty);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSortie(): Collection
+    {
+        return $this->sortie;
+    }
+
+    public function addSortie(Sortie $sortie): self
+    {
+        if (!$this->sortie->contains($sortie)) {
+            $this->sortie[] = $sortie;
+            $sortie->setOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortie(Sortie $sortie): self
+    {
+        if ($this->sortie->contains($sortie)) {
+            $this->sortie->removeElement($sortie);
+            // set the owning side to null (unless already changed)
+            if ($sortie->getOrganisateur() === $this) {
+                $sortie->setOrganisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
 }

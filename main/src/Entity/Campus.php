@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CampusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,14 +25,16 @@ class Campus
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participant", mappedBy="campus", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="campus", orphanRemoval=true)
      */
     private $participants;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="campus", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="campus", orphanRemoval=true)
      */
     private $sorties;
+
+
 
     /**
      * Campus constructor.
@@ -65,34 +68,64 @@ class Campus
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection|Participant[]
      */
-    public function getParticipants(): ArrayCollection
+    public function getParticipants(): Collection
     {
         return $this->participants;
     }
 
-    /**
-     * @param ArrayCollection $participants
-     */
-    public function setParticipants(ArrayCollection $participants): void
+    public function addParticipant(Participant $participant): self
     {
-        $this->participants = $participants;
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->setCampus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+            // set the owning side to null (unless already changed)
+            if ($participant->getCampus() === $this) {
+                $participant->setCampus(null);
+            }
+        }
+
+        return $this;
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection|Sortie[]
      */
-    public function getSorties(): ArrayCollection
+    public function getSorties(): Collection
     {
         return $this->sorties;
     }
 
-    /**
-     * @param ArrayCollection $sorties
-     */
-    public function setSorties(ArrayCollection $sorties): void
+    public function addSorty(Sortie $sorty): self
     {
-        $this->sorties = $sorties;
+        if (!$this->sorties->contains($sorty)) {
+            $this->sorties[] = $sorty;
+            $sorty->setCampus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSorty(Sortie $sorty): self
+    {
+        if ($this->sorties->contains($sorty)) {
+            $this->sorties->removeElement($sorty);
+            // set the owning side to null (unless already changed)
+            if ($sorty->getCampus() === $this) {
+                $sorty->setCampus(null);
+            }
+        }
+
+        return $this;
     }
 }
