@@ -19,10 +19,16 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
-    public function findByFilter($value){
+    public function findByFilter($search, $campusId, $dateDebut, $dateFin){
         return $this->createQueryBuilder('s')
-            ->andWhere('s.nom = :val')
-            ->setParameter('val', $value)
+            ->andWhere('s.nom LIKE :search')
+            ->setParameter('search', $search.'%')
+            ->andWhere('s.campus = :campusId')
+            ->setParameter('campusId', $campusId)
+            ->andWhere('s.dateHeureDebut > :dateDebut')
+            ->setParameter('dateDebut', $dateDebut)
+            ->andWhere('s.dateHeureDebut < :dateFin')
+            ->setParameter('dateFin', $dateFin)
             ->orderBy('s.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()

@@ -55,7 +55,7 @@ class Sortie
     private $participants;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortie")
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="sortiesOrganisee")
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;

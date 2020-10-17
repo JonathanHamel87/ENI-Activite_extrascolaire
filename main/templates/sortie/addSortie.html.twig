@@ -2,7 +2,7 @@
 
 {% block title %} Sortie {% endblock %}
 {% block main %}
-   {{ form_start(sortieForm, {'attr': {'class': 'd-flex flex-row'}}) }}
+   {{ form_start(sortieForm, {'attr': {'class': 'd-flex flex-row flex-wrap'}}) }}
    <div class="col-6">
       <div class="col-12 d-inline-block mt-4">
          {{ form_label(sortieForm.nom) }}
@@ -36,9 +36,13 @@
          {{ form_widget(sortieForm.campus) }}
       </div>
       <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.ville) }}
-         {{ form_widget(sortieForm.ville) }}
+         {{ form_label(sortieForm.lieu) }}
+         {{ form_widget(sortieForm.lieu) }}
       </div>
    </div>
    {{ form_end(sortieForm) }}
+{% endblock %}
+{% block javascripts_footer %}
+   {{ parent() }}
+   <script src="{{ asset('js/eventListener.js') }}"
 {% endblock %}

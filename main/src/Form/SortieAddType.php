@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Campus;
 use App\Entity\Etat;
+use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Entity\Ville;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -58,10 +60,46 @@ class SortieAddType extends AbstractType
                 'choice_label' => 'nom',
                 'disabled' => true,
             ])
-            ->add('ville', EntityType::class, [
+            /*->add('ville', EntityType::class, [
                 'label' => 'Ville : ',
                 'class' => Ville::class,
+                'choice_label' => 'nom',
+            ])*/
+            ->add('lieu', EntityType::class, [
+                'class' => Lieu::class,
                 'choice_label' => 'nom'
+            ])
+            /*->add('rue', TextType::class, [
+                'label' => 'Rue : ',
+                'disabled' => true,
+            ])
+            ->add('codePostal', TextType::class, [
+                'label' => 'Code postal : ',
+                'disabled' => true,
+            ])*/
+            /*->add('latitude', TextType::class, [
+                'label' => 'Latitude : '
+            ])
+            ->add('longitude', TextType::class, [
+                'label' => 'Longitude : '
+            ])*/
+            ->add('enregistrer', SubmitType::class, [
+                'label' => 'Enregistrer',
+                'attr' => array(
+                    'class' => 'btn btn-secondary'
+                )
+            ])
+            ->add('publier', SubmitType::class, [
+                'label' => 'Publier la sortie',
+                'attr' => array(
+                    'class' => 'btn btn-secondary'
+                )
+            ])
+            ->add('annuler', SubmitType::class, [
+                'label' => 'annuler',
+                'attr' => array(
+                    'class' => 'btn btn-secondary'
+                )
             ])
             /*->add('organisateur', EntityType::class, [
                 'class' => Participant::class,

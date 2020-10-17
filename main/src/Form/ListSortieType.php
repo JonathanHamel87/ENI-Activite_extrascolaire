@@ -58,10 +58,10 @@ class ListSortieType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
                 'label_attr' => array(
-                    'class' => 'col-4'
+                    'class' => 'col-3'
                 ),
                 'attr' => array(
-                    'class' => 'col-8'
+                    'class' => 'col-9'
                 )
             ])
             ->add('bOrganisateur', CheckboxType::class, [
@@ -90,7 +90,7 @@ class ListSortieType extends AbstractType
                     'class' => 'btn btn-secondary'
                 )
             ])
-            ->add('creerSortie', ButtonType::class, [
+            ->add('creerSortie', SubmitType::class, [
                 'label' => 'Créer une sortie',
                 'attr' => array(
                     'class' => 'btn btn-secondary',

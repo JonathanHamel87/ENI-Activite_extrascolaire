@@ -21,6 +21,7 @@ class SortieViewType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        dump($options);
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom de la sortie :',
@@ -101,6 +102,12 @@ class SortieViewType extends AbstractType
                 ),
                 'disabled' => true,
             ])
+            ->add('nomCampus', TextType::class, [
+                'attr' => array(
+                    'value' => $options['data']->getCampus()->getNom()
+                ),
+                'mapped' => false,
+            ])
             ->add('lieu', EntityType::class, [
                 'class' => Lieu::class,
                 'choice_label' => 'nom',
@@ -138,6 +145,7 @@ class SortieViewType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Sortie::class,
+            'toto' => null
         ]);
     }
 }

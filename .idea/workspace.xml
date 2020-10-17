@@ -19,24 +19,24 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee893464-c375-458a-91bc-2edb6a9d6993" name="Default Changelist" comment="- Mise en page des vue créer, modifier, afficher Sortie&#10;&#10;Travail suivant :&#10;- Trouver comment récupérer une liste d'objet lié à une entité">
-      <change afterPath="$PROJECT_DIR$/main/public/uploads/img/1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/src/Form/SortieUpdateType.php" afterDir="false" />
+    <list default="true" id="ee893464-c375-458a-91bc-2edb6a9d6993" name="Default Changelist" comment="- Avancement des vues gestion des sorties&#10;&#10;Travail suivant :&#10;- Voir pour ajouter les event button dans le Form">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/main/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/public/js/eventListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/public/js/eventListener.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Controller/MainController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Controller/SortieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Controller/SortieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/Entity/Campus.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Campus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/Entity/Etat.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Etat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/Entity/Lieu.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Lieu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Entity/Participant.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Participant.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Entity/Sortie.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Sortie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/Entity/Ville.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Entity/Ville.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Form/ListSortieType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/ListSortieType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Form/RegisterType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/RegisterType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Form/SortieAddType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/SortieAddType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Form/SortieUpdateType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/SortieUpdateType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Form/SortieViewType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/SortieViewType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/Repository/EtatRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Repository/EtatRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Repository/ParticipantRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Repository/ParticipantRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Repository/SortieRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Repository/SortieRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/home.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/sortie/sortie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/sortie/sortie.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/sortie/updateSortie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/sortie/updateSortie.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/sortie/addSortie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/sortie/addSortie.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/user/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/user/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +203,9 @@
       <workItem from="1602569675178" duration="20451000" />
       <workItem from="1602654880384" duration="19899000" />
       <workItem from="1602762334457" duration="9849000" />
-      <workItem from="1602825843834" duration="8786000" />
+      <workItem from="1602825843834" duration="11008000" />
+      <workItem from="1602844174624" duration="14220000" />
+      <workItem from="1602947135755" duration="1263000" />
     </task>
     <task id="LOCAL-00001" summary="- Création de la vue profil.html.twig&#10;- Mise en place du formulaire&#10;&#10;Travail suivant :&#10;- Animer le formulaire de profil.html.twig&#10;- Ajouter le système d'image&#10;- Mettre en place la méthode Post">
       <created>1601995663588</created>
@@ -233,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602683895112</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- Avancement des vues gestion des sorties&#10;&#10;Travail suivant :&#10;- Voir pour ajouter les event button dans le Form">
+      <created>1602842021425</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1602842021425</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,7 +266,8 @@
     <MESSAGE value="- Modification de la page profil pour remplacer le formulaire par un Form&#10;- Mise en place de la modification du profil&#10;- Mise en place de l'upload de la photo de profil&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form" />
     <MESSAGE value="- Page home presque fonctionnelle, soucis au niveau de la liste des sorties&#10;&#10;Travail suivant :&#10;- Modifier la page home afin de remplacer par un Form" />
     <MESSAGE value="- Mise en page des vue créer, modifier, afficher Sortie&#10;&#10;Travail suivant :&#10;- Trouver comment récupérer une liste d'objet lié à une entité" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Mise en page des vue créer, modifier, afficher Sortie&#10;&#10;Travail suivant :&#10;- Trouver comment récupérer une liste d'objet lié à une entité" />
+    <MESSAGE value="- Avancement des vues gestion des sorties&#10;&#10;Travail suivant :&#10;- Voir pour ajouter les event button dans le Form" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Avancement des vues gestion des sorties&#10;&#10;Travail suivant :&#10;- Voir pour ajouter les event button dans le Form" />
   </component>
   <component name="WindowStateProjectService">
     <state x="770" y="403" key="#Composer" timestamp="1601907347419">
@@ -268,10 +278,11 @@
       <screen x="0" y="0" width="1920" height="1048" />
     </state>
     <state x="552" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1601996218167" />
-    <state x="753" y="233" key="#com.intellij.ide.util.MemberChooser" timestamp="1602777161470">
-      <screen x="0" y="0" width="1920" height="1048" />
+    <state x="753" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1602948372834">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="753" y="233" key="#com.intellij.ide.util.MemberChooser/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602777161470" />
+    <state x="753" y="229" key="#com.intellij.ide.util.MemberChooser/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602948372834" />
+    <state x="753" y="233" key="#com.intellij.ide.util.MemberChooser/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602842282015" />
     <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1602830675786">
       <screen x="0" y="0" width="1920" height="1048" />
     </state>
@@ -303,6 +314,14 @@
       <screen x="0" y="0" width="1920" height="1048" />
     </state>
     <state x="802" y="411" width="316" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602826408766" />
+    <state x="796" y="297" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1602842102219">
+      <screen x="0" y="0" width="1920" height="1048" />
+    </state>
+    <state x="796" y="297" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602842102219" />
+    <state x="667" y="249" width="585" height="534" key="find.popup" timestamp="1602947868337">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="667" y="249" width="585" height="534" key="find.popup/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602947868337" />
     <state x="738" y="425" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1601995558338">
       <screen x="0" y="0" width="1920" height="1048" />
     </state>

@@ -50,9 +50,20 @@ class MainController extends AbstractController
 
         /* Soumission formulaire */
         if ($listeSortieForm->isSubmitted() && $listeSortieForm->isValid()){
+            if ($listeSortieForm->get('creerSortie')->isClicked()){
+                return $this->redirectToRoute('sortie_add');
+            }
             $sortieRepo = $em->getRepository(Sortie::class);
 
-            $sorties = $sortieRepo->findByFilter($listeSortieForm->get('nomSortie')->getViewData());
+            /* Préparation des critères */
+            $search = $listeSortieForm->get('nomSortie')->getViewData();
+            $campusId = $listeSortieForm->get('campus')->getViewData();
+            $dateDebut = $listeSortieForm->get('firstDate')->getViewData();
+            $dateFin = $listeSortieForm->get('secondeDate')->getViewData();
+
+            $sorties = $sortieRepo->findByFilter($search, $campusId, $dateDebut, $dateFin);
+
+
         }
 
 

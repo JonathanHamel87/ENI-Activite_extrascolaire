@@ -22,9 +22,9 @@ class Participant implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30, name="pseudo", unique=true)
+     * @ORM\Column(type="string", length=30, unique=true)
      */
-    private $username;
+    private $pseudo;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -47,9 +47,9 @@ class Participant implements UserInterface
     private $mail;
 
     /**
-     * @ORM\Column(type="string", length=255, name="motPasse")
+     * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private $motPasse;
 
     /**
      * @ORM\Column(type="boolean")
@@ -70,7 +70,6 @@ class Participant implements UserInterface
     {
         $this->sortiesOrganisee = new ArrayCollection();
         $this->sorties = new ArrayCollection();
-        $this->sortie = new ArrayCollection();
     }
 
     /**
@@ -97,7 +96,7 @@ class Participant implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur", orphanRemoval=true)
      */
-    private $sortie;
+    private $sortiesOrganisee;
 
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
@@ -115,18 +114,20 @@ class Participant implements UserInterface
     /**
      * @return mixed
      */
-    public function getUsername()
+    public function getPseudo()
     {
-        return $this->username;
+        return $this->pseudo;
     }
 
     /**
-     * @param mixed $username
+     * @param mixed $pseudo
      */
-    public function setUsername($username): void
+    public function setPseudo($pseudo): void
     {
-        $this->username = $username;
+        $this->pseudo = $pseudo;
     }
+
+
 
 
     /**
@@ -196,18 +197,20 @@ class Participant implements UserInterface
     /**
      * @return mixed
      */
-    public function getPassword()
+    public function getMotPasse()
     {
-        return $this->password;
+        return $this->motPasse;
     }
 
     /**
-     * @param mixed $password
+     * @param mixed $motPasse
      */
-    public function setPassword($password): void
+    public function setMotPasse($motPasse): void
     {
-        $this->password = $password;
+        $this->motPasse = $motPasse;
     }
+
+
 
     /**
      * @return mixed
@@ -315,28 +318,28 @@ class Participant implements UserInterface
     /**
      * @return Collection|Sortie[]
      */
-    public function getSortie(): Collection
+    public function getSortiesOrganisee(): Collection
     {
-        return $this->sortie;
+        return $this->sortiesOrganisee;
     }
 
-    public function addSortie(Sortie $sortie): self
+    public function addSortieOrganisee(Sortie $sortieOrganisee): self
     {
-        if (!$this->sortie->contains($sortie)) {
-            $this->sortie[] = $sortie;
-            $sortie->setOrganisateur($this);
+        if (!$this->sortiesOrganisee->contains($sortieOrganisee)) {
+            $this->sortiesOrganisee[] = $sortieOrganisee;
+            $sortieOrganisee->setOrganisateur($this);
         }
 
         return $this;
     }
 
-    public function removeSortie(Sortie $sortie): self
+    public function removeSortieOrganisee(Sortie $sortieOrganisee): self
     {
-        if ($this->sortie->contains($sortie)) {
-            $this->sortie->removeElement($sortie);
+        if ($this->sortiesOrganisee->contains($sortieOrganisee)) {
+            $this->sortiesOrganisee->removeElement($sortieOrganisee);
             // set the owning side to null (unless already changed)
-            if ($sortie->getOrganisateur() === $this) {
-                $sortie->setOrganisateur(null);
+            if ($sortieOrganisee->getOrganisateur() === $this) {
+                $sortieOrganisee->setOrganisateur(null);
             }
         }
 
@@ -353,5 +356,15 @@ class Participant implements UserInterface
         $this->campus = $campus;
 
         return $this;
+    }
+
+    public function getUsername()
+    {
+        return $this->pseudo;
+    }
+
+    public function getPassword()
+    {
+        return $this->getMotPasse();
     }
 }

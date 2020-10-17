@@ -58,6 +58,11 @@
 
             </thead>
             <tbody>
+            {% if sorties is empty %}
+                <tr>
+                    <td colspan="8" class="text-center">Aucune sortie de trouvée !</td>
+                </tr>
+            {% else %}
                 {% for sortie in sorties %}
                     <tr>
                         <td>{{ sortie.nom }}</td>
@@ -95,6 +100,7 @@
                         </td>
                     </tr>
                 {% endfor %}
+            {% endif %}
             </tbody>
         </table>
         {{ form_row(listSortieForm.creerSortie) }}
@@ -103,7 +109,6 @@
 {% endblock %}
 {% block javascripts_footer %}
     {{ parent() }}
-    <script src="{{ asset('js/eventListener.js') }}"></script>
 {% endblock %}
 
 

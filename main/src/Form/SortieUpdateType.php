@@ -109,13 +109,13 @@ class SortieUpdateType extends AbstractType
                     'class' => 'btn btn-secondary'
                 )
             ])
-            ->add('publier', ButtonType::class, [
+            ->add('publier', SubmitType::class, [
                 'label' => 'Publier la sortie',
                 'attr' => array(
                     'class' => 'btn btn-secondary'
-                )
+                ),
             ])
-            ->add('supprimer', ButtonType::class, [
+            ->add('supprimer', SubmitType::class, [
                 'label' => 'Supprimer la sortie',
                 'attr' => array(
                     'class' => 'btn btn-secondary'
