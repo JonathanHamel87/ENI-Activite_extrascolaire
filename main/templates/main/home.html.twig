@@ -97,6 +97,7 @@
                                 {% endfor %}
                             {% endif %}
                             <a class="" href="{{ path('sortie_view', {'id': sortie.id})  }}">Afficher</a>
+                            <a class="" href="{{ path('sortie_test', {'id': sortie.id})  }}">Test</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -104,7 +105,9 @@
             </tbody>
         </table>
         {{ form_row(listSortieForm.creerSortie) }}
+
         {{ form_end(listSortieForm) }}
+
     </div>
 {% endblock %}
 {% block javascripts_footer %}

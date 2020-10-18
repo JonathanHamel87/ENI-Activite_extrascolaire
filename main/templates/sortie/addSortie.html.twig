@@ -2,47 +2,56 @@
 
 {% block title %} Sortie {% endblock %}
 {% block main %}
-   {{ form_start(sortieForm, {'attr': {'class': 'd-flex flex-row flex-wrap'}}) }}
+   <h3 class="col-12 text-center mb-5">Afficher une sortie</h3>
+   {{ form_start(sortieForm, {'attr': {'class': 'd-flex flex-row offset-1 col-10 flex-wrap'}}) }}
    <div class="col-6">
-      <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.nom) }}
-         {{ form_widget(sortieForm.nom) }}
+      {{ form_row(sortieForm.nom) }}
+      {{ form_row(sortieForm.dateSortie) }}
+      {{ form_row(sortieForm.dateLimite) }}
+      {{ form_row(sortieForm.nombrePlace) }}
+      {{ form_row(sortieForm.duree) }}
+      {{ form_row(sortieForm.description) }}
+   </div>
+   <div class="col-6">
+      {{ form_row(sortieForm.campus) }}
+      <div class="col-12 d-flex flex-row m-0 p-0 border-0">
+         <label class="col-6" for="ville">Ville :</label>
+         <select class="col-6" id="ville" name="ville">
+            {% for ville in villes %}
+               <option id="{{ ville.id }}">{{ ville.nom }}</option>
+            {%  endfor %}
+         </select>
       </div>
-      <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.dateHeureDebut) }}
-         {{ form_widget(sortieForm.dateHeureDebut) }}
+      <div class="col-12 d-flex flex-row m-0 p-0 border-0">
+         <label class="col-6" for="lieu">Lieu :</label>
+         <select class="col-6" id="lieu" name="lieu">
+            {% for lieu in lieux %}
+               <option id="{{ lieu.id }}">{{ lieu.nom }}</option>
+            {%  endfor %}
+         </select>
+         <span>+</span>
       </div>
-      <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.dateLimiteInscription) }}
-         {{ form_widget(sortieForm.dateLimiteInscription) }}
+      <div class="col-12 d-flex flex-row m-0 p-0 border-0">
+         <label class="col-6" for="rue">Rue :</label>
+         <input class="col-6" id="rue" name="rue" value="{{ lieu.rue }}" disabled>
       </div>
-      <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.nbInscriptionMax) }}
-         {{ form_widget(sortieForm.nbInscriptionMax) }}
+      <div class="col-12 d-flex flex-row m-0 p-0 border-0">
+         <label class="col-6" for="codePostal">Code postal :</label>
+         <input class="col-6" id="codePostal" name="codePostal" value="{{ lieu.ville.codePostal }}" disabled>
       </div>
-      <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.duree) }}
-         {{ form_widget(sortieForm.duree) }}
+      <div class="col-12 d-flex flex-row m-0 p-0 border-0">
+         <label class="col-6" for="latitude">Latitude :</label>
+         <input class="col-6" id="latitude" name="latitude" value="{{ lieu.latitude }}">
       </div>
-      <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.infosSortie) }}
-         {{ form_widget(sortieForm.infosSortie) }}
+      <div class="col-12 d-flex flex-row m-0 p-0 border-0">
+         <label class="col-6" for="longitude">Longitude :</label>
+         <input class="col-6" id="longitude" name="longitude" value="{{ lieu.longitude }}">
       </div>
    </div>
-
-   <div class="col-6">
-      <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.campus) }}
-         {{ form_widget(sortieForm.campus) }}
-      </div>
-      <div class="col-12 d-inline-block mt-4">
-         {{ form_label(sortieForm.lieu) }}
-         {{ form_widget(sortieForm.lieu) }}
-      </div>
+   <div>
+      {{ form_row(sortieForm.enregistrer) }}
+      {{ form_row(sortieForm.publier) }}
+      {{ form_row(sortieForm.annuler) }}
    </div>
    {{ form_end(sortieForm) }}
-{% endblock %}
-{% block javascripts_footer %}
-   {{ parent() }}
-   <script src="{{ asset('js/eventListener.js') }}"
 {% endblock %}

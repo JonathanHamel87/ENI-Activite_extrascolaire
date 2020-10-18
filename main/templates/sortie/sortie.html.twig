@@ -4,34 +4,22 @@
 {% block main %}
     <h3 class="col-12 text-center mb-5">Afficher une sortie</h3>
     {{ form_start(sortieForm, {'attr': {'class': 'd-flex flex-row offset-1 col-10'}}) }}
-    <div class="col-6">
-        {{ form_row(sortieForm.nom) }}
-        {{ form_row(sortieForm.dateHeureDebut) }}
-        {{ form_row(sortieForm.dateLimiteInscription) }}
-        {{ form_row(sortieForm.nbInscriptionMax) }}
-        {{ form_row(sortieForm.duree) }}
-        {{ form_row(sortieForm.infosSortie) }}
-    </div>
-    <div class="col-6">
-        {{ form_row(sortieForm.campus) }}
-        {{ form_row(sortieForm.lieu) }}
-        <div class="col-12 d-flex flex-row m-0 p-0 border-0 mb-2">
-            <label class="col-6" for="">Rue : </label>
-            <input class="col-6" type="text" value="{{ sortie.lieu.rue }}" disabled/>
+        <div class="col-6">
+            {{ form_row(sortieForm.nom) }}
+            {{ form_row(sortieForm.dateSortie) }}
+            {{ form_row(sortieForm.dateLimite) }}
+            {{ form_row(sortieForm.nombrePlace) }}
+            {{ form_row(sortieForm.duree) }}
+            {{ form_row(sortieForm.description) }}
         </div>
-        <div class="col-12 d-flex flex-row m-0 p-0 border-0 mb-2">
-            <label class="col-6" for="">Code postal : </label>
-            <input class="col-6" type="text" value="{{ sortie.lieu.ville.codePostal }}" disabled/>
+        <div class="col-6">
+            {{ form_row(sortieForm.campus) }}
+            {{ form_row(sortieForm.lieu) }}
+            {{ form_row(sortieForm.rue) }}
+            {{ form_row(sortieForm.codePostal) }}
+            {{ form_row(sortieForm.latitude) }}
+            {{ form_row(sortieForm.longitude) }}
         </div>
-        <div class="col-12 d-flex flex-row m-0 p-0 border-0 mb-2">
-            <label  class="col-6" for="">Latitude : </label>
-            <input class="col-6" type="text" value="{{ sortie.lieu.latitude }}" disabled/>
-        </div>
-        <div class="col-12 d-flex flex-row m-0 p-0 border-0 mb-2">
-            <label class="col-6" for="">Longitude : </label>
-            <input class="col-6" type="text" value="{{ sortie.lieu.longitude }}" disabled/>
-        </div>
-    </div>
     {{ form_end(sortieForm) }}
     <div class="ml-4">
         <h4>Liste des participants inscrits :</h4>

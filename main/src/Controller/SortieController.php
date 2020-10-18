@@ -4,14 +4,20 @@ namespace App\Controller;
 
 use App\Entity\Etat;
 use App\Entity\Lieu;
+use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\SortieAddType;
+use App\Form\SortieType;
 use App\Form\SortieUpdateType;
 use App\Form\SortieViewType;
+use App\Model\SortieFormulaire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 /**
  * Class MainController
@@ -24,28 +30,27 @@ class SortieController extends AbstractController
      * @Route ("/view/{id}", name="sortie_view")
      */
     public function showSortie(Request $request,EntityManagerInterface $em, $id){
-
         $sortieRepo = $em->getRepository(Sortie::class);
         $sortie = $sortieRepo->find($id);
 
-        $sortieForm = $this->createForm(SortieViewType::class, $sortie, ['toto' => null]);
+        /* Création du model */
+        $sortieFormulaire = new SortieFormulaire();
+        $sortieFormulaire->setNom($sortie->getNom());
+        $sortieFormulaire->setDateSortie($sortie->getDateHeureDebut());
+        $sortieFormulaire->setDateLimite($sortie->getDateLimiteInscription());
+        $sortieFormulaire->setNombrePlace($sortie->getNbInscriptionMax());
+        $sortieFormulaire->setDuree($sortie->getDuree());
+        $sortieFormulaire->setDescription($sortie->getInfosSortie());
+        $sortieFormulaire->setCampus($sortie->getCampus()->getNom());
+        $sortieFormulaire->setVille($sortie->getLieu()->getVille()->getNom());
+        $sortieFormulaire->setLieu($sortie->getLieu()->getNom());
+        $sortieFormulaire->setRue($sortie->getLieu()->getRue());
+        $sortieFormulaire->setCodePostal($sortie->getLieu()->getVille()->getCodePostal());
+        $sortieFormulaire->setLatitude($sortie->getLieu()->getLatitude());
+        $sortieFormulaire->setLongitude($sortie->getLieu()->getLongitude());
+
+        $sortieForm = $this->createForm(SortieType::class, $sortieFormulaire, ['mode' => 'view']);
         $sortieForm->handleRequest($request);
-
-        $lieuRepo = $em->getRepository(Lieu::class);
-        $lieu = $lieuRepo->find($sortieForm->get('lieu')->getViewData());
-
-        //$nomVille = $em->getRepository(Ville::class)->find($lieu->getVille());
-
-        $participants = $sortie->getParticipants();
-
-        dump($sortie->getLieu());
-
-
-
-        /* Soumission formulaire */
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-
-        }
 
         return $this->render('sortie/sortie.html.twig', [
             "sortieForm" => $sortieForm->createView(),
@@ -56,43 +61,35 @@ class SortieController extends AbstractController
     /**
      * @Route("/add", name="sortie_add")
      */
-    public function addSortie(Request $request, EntityManagerInterface $em){
+    public function addSortie(Request $request, EntityManagerInterface $em, UserInterface $user){
         $sortie = new Sortie();
-        $lieu = new Lieu();
 
-        $sortieForm = $this->createForm(SortieAddType::class);
+        /* Utilisateur connecté */
+        $participantRepo = $em->getRepository(Participant::class);
+        $participant = $participantRepo->findByUsername($user->getUsername());
+
+        /* Liste de ville */
+        $villeRepo = $em->getRepository(Ville::class);
+        $villes = $villeRepo->findAll();
+
+        /* Liste de lieu */
+        $lieuRepo = $em->getRepository(Lieu::class);
+        $lieux = $lieuRepo->findByVille($villes[0]->getId());
+
+
+        /* Création du model */
+        $sortieFormulaire = new SortieFormulaire();
+        $sortieFormulaire->setCampus($participant[0]->getCampus()->getNom());
+
+
+        $sortieForm = $this->createForm(SortieType::class, $sortieFormulaire, ['mode' => 'add']);
         $sortieForm->handleRequest($request);
 
-
-
-        /* Soumission formulaire */
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-            /* Définition lieu */
-            /*$lieuRepo = $em->getRepository(Lieu::class);
-            $lieu = $lieuRepo->find($sortieForm->get('lieu')->getViewData());
-            /*$lieu->setLatitude($sortieForm->get('latitude')->getViewData());
-            $lieu->setLongitude($sortieForm->get('longitude')->getViewData());*/
-
-
-            /* Définition sortie */
-            /*$sortie->setNom();
-            $sortie->setDateHeureDebut();
-            $sortie->setDateLimiteInscription();
-            $sortie->setNbInscriptionMax();
-            $sortie->setDuree();
-            $sortie->setInfosSortie();
-            $sortie->setCampus();
-            $sortie->setLieu();*/
-            //dump($lieu);
-
-
-            if ($sortieForm->get('publier')->isClicked()){
-                dump('publier');
-            }
-        }
-
         return $this->render('sortie/addSortie.html.twig',[
-            "sortieForm" => $sortieForm->createView()
+            "sortieForm" => $sortieForm->createView(),
+            "villes" => $villes,
+            "lieux" => $lieux,
+            "lieu" => $lieux[0]
         ]);
     }
 
@@ -171,5 +168,40 @@ class SortieController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route ("/test/{id}", name="sortie_test")
+     */
+    public function test(EntityManagerInterface $em, Request $request, $id){
+        $sortieRepo = $em->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($id);
+
+        /* Création du model */
+        $sortieFormulaire = new SortieFormulaire();
+        $sortieFormulaire->setNom($sortie->getNom());
+        $sortieFormulaire->setDateSortie($sortie->getDateHeureDebut());
+        $sortieFormulaire->setDateLimite($sortie->getDateLimiteInscription());
+        $sortieFormulaire->setNombrePlace($sortie->getNbInscriptionMax());
+        $sortieFormulaire->setDuree($sortie->getDuree());
+        $sortieFormulaire->setDescription($sortie->getInfosSortie());
+        $sortieFormulaire->setCampus($sortie->getCampus()->getNom());
+        $sortieFormulaire->setVille($sortie->getLieu()->getVille()->getNom());
+        $sortieFormulaire->setLieu($sortie->getLieu()->getNom());
+        $sortieFormulaire->setRue($sortie->getLieu()->getRue());
+        $sortieFormulaire->setCodePostal($sortie->getLieu()->getVille()->getCodePostal());
+        $sortieFormulaire->setLatitude($sortie->getLieu()->getLatitude());
+        $sortieFormulaire->setLongitude($sortie->getLieu()->getLongitude());
+
+        $sortieForm = $this->createForm(SortieType::class, $sortieFormulaire, ['mode' => 'view']);
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+            
+        }
+
+        return $this->render('sortie/test.html.twig', [
+            "sortieForm" => $sortieForm->createView()
+        ]);
     }
 }

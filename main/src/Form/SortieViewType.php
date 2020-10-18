@@ -9,6 +9,7 @@ use App\Entity\Sortie;
 use App\Entity\Ville;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -21,7 +22,7 @@ class SortieViewType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        dump($options);
+        dump($options['toto']);
         $builder
             ->add('nom', TextType::class, [
                 'label' => 'Nom de la sortie :',
@@ -139,6 +140,16 @@ class SortieViewType extends AbstractType
                 'entry_type' => Participant::class,
             ])*/
             ;
+
+            /*if ($options['toto'] === "test"){
+                $builder
+                    ->add('test', ButtonType::class, [
+                        'label' => 'test',
+                        'attr' => array(
+                            'value' => 'test',
+                        )
+                    ]);
+            }*/
     }
 
     public function configureOptions(OptionsResolver $resolver)

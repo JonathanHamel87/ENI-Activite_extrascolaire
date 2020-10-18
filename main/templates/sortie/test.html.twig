@@ -1,0 +1,8 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Sortie {% endblock %}
+{% block main %}
+    {{ form_start(sortieForm, {'attr': {'class': 'd-flex flex-row flex-wrap'}}) }}
+    {{ form_widget(sortieForm) }}
+    {{ form_end(sortieForm) }}
+{% endblock %}
