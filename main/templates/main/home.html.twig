@@ -88,16 +88,22 @@
                                     <a class="" href="{{ path('sortie_annuler', {'id': sortie.id})  }}">Annuler</a>
                                 {% endif %}
                             {% else %}
-                                {% for participant in sortie.participants %}
-                                    {% if participant == user %}
-                                        <a class="" href="{{ path('home', {'id': sortie.id})  }}">Se désister</a>
+                                {% if sortie.participants is empty %}
+                                    <a class="" href="{{ path('sortie_add_participant', {'id': sortie.id})  }}">S'inscrire</a>
+                                {% else %}
+                                    {% for participant in sortie.participants %}
+                                        {% if participant == user %}
+                                            {%  set isPresent = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if isPresent == true %}
+                                        <a class="" href="{{ path('sortie_remove_participant', {'id': sortie.id})  }}">Se désister</a>
                                     {% else %}
-                                        <a class="" href="{{ path('home', {'id': sortie.id})  }}">S'inscrire</a>
+                                        <a class="" href="{{ path('sortie_add_participant', {'id': sortie.id})  }}">S'inscrire</a>
                                     {% endif %}
-                                {% endfor %}
+                                {% endif %}
                             {% endif %}
                             <a class="" href="{{ path('sortie_view', {'id': sortie.id})  }}">Afficher</a>
-                            <a class="" href="{{ path('sortie_test', {'id': sortie.id})  }}">Test</a>
                         </td>
                     </tr>
                 {% endfor %}

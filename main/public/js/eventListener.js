@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     /* Modification du lieu lors de la création d'une sortie */
-    $('#lieu').change(function (){
+    $('#lieu').on("change",function (){
         let id = $(this).children(":selected").attr("id");
         $.ajax({
         method : 'GET',
@@ -17,7 +17,7 @@ $(document).ready(function(){
     });
 
     /* Modification de la ville lors de la création d'une sortie */
-    $('#ville').change(function (){
+    $('#ville').on("change",function (){
         let id = $(this).children(":selected").attr("id");
         $.ajax({
             method : 'GET',
@@ -45,5 +45,10 @@ $(document).ready(function(){
                 });
             }
         });
+    });
+
+    /* Bouton annuler */
+    $('.btn-annuler').on("click",function (){
+        window.location.href = '/';
     });
 });

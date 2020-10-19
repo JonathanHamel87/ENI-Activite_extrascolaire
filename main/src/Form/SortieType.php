@@ -2,13 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Campus;
-use App\Entity\Sortie;
 use App\Model\SortieFormulaire;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -96,16 +92,6 @@ class SortieType extends AbstractType
                 ])
                 ->add('campus', TextType::class, [
                     'label' => 'Campus :',
-                    'label_attr' => array(
-                        'class' => 'col-6'
-                    ),
-                    'attr' => array(
-                        'class' => 'col-6',
-                    ),
-                    'disabled' => true,
-                ])
-                ->add('ville', TextType::class, [
-                    'label' => 'Ville :',
                     'label_attr' => array(
                         'class' => 'col-6'
                     ),
@@ -230,15 +216,6 @@ class SortieType extends AbstractType
                         'class' => 'col-6',
                     ),
                 ])
-                /*->add('campus', TextType::class, [
-                    'label_attr' => array(
-                        'class' => 'col-6'
-                    ),
-                    'attr' => array(
-                        'class' => 'col-6',
-                    ),
-                    'disabled' => true,
-                ])*/
                 ->add('enregistrer', SubmitType::class, [
                     'attr' => array(
                         'class' => 'btn btn-secondary'
@@ -249,9 +226,9 @@ class SortieType extends AbstractType
                         'class' => 'btn btn-secondary'
                     )
                 ])
-                ->add('annuler', SubmitType::class, [
+                ->add('annuler', ButtonType::class, [
                     'attr' => array(
-                        'class' => 'btn btn-secondary'
+                        'class' => 'btn btn-secondary btn-annuler',
                     )
                 ])
             ;

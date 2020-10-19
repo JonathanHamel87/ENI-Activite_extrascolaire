@@ -90,38 +90,42 @@ class SortieController extends AbstractController
         $sortieForm = $this->createForm(SortieType::class, $sortieFormulaire, ['mode' => 'add']);
         $sortieForm->handleRequest($request);
 
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-            /* Récupération Lieu */
-            $lieu = $lieuRepo->findByNom($request->get('lieu'));
+        if ($sortieForm->isSubmitted()){
+            if($sortieForm->isValid()){
+                /* Récupération Lieu */
+                $lieu = $lieuRepo->findByNom($request->get('lieu'));
 
-            /* préparation de sortie avant flush */
-            $sortie->setNom($sortieForm->get('nom')->getViewData());
-            $sortie->setDateHeureDebut($sortieForm->get('dateSortie')->getData());
-            $sortie->setDateLimiteInscription($sortieForm->get('dateLimite')->getData());
-            $sortie->setNbInscriptionMax($sortieForm->get('nombrePlace')->getData());
-            $sortie->setDuree($sortieForm->get('duree')->getData());
-            $sortie->setInfosSortie($sortieForm->get('description')->getViewData());
-            $sortie->setCampus($campus);
-            $sortie->setLieu($lieu);
-            $sortie->setOrganisateur($organisateur);
+                /* préparation de sortie avant flush */
+                $sortie->setNom($sortieForm->get('nom')->getViewData());
+                $sortie->setDateHeureDebut($sortieForm->get('dateSortie')->getData());
+                $sortie->setDateLimiteInscription($sortieForm->get('dateLimite')->getData());
+                $sortie->setNbInscriptionMax($sortieForm->get('nombrePlace')->getData());
+                $sortie->setDuree($sortieForm->get('duree')->getData());
+                $sortie->setInfosSortie($sortieForm->get('description')->getViewData());
+                $sortie->setCampus($campus);
+                $sortie->setLieu($lieu);
+                $sortie->setOrganisateur($organisateur);
 
 
 
-            if ($sortieForm->get('enregistrer')->isClicked()){
-                /* Définition état */
-                $etat = $em->getRepository(Etat::class)->find(1);
-                $sortie->setEtat($etat);
-            }else if ($sortieForm->get('publier')->isClicked()){
-                /* Définition état */
-                $etat = $em->getRepository(Etat::class)->find(2);
-                $sortie->setEtat($etat);
-                $sortie->addParticipant($organisateur);
-            }else if($sortieForm->get('annuler')->isClicked()){
-                return $this->redirectToRoute('home');
+                if ($sortieForm->get('enregistrer')->isClicked()){
+                    /* Définition état */
+                    $etat = $em->getRepository(Etat::class)->find(1);
+                    $sortie->setEtat($etat);
+                }else if ($sortieForm->get('publier')->isClicked()){
+                    /* Définition état */
+                    $etat = $em->getRepository(Etat::class)->find(2);
+                    $sortie->setEtat($etat);
+                    $sortie->addParticipant($organisateur);
+                }
+
+                $em->persist($sortie);
+                $em->flush();
+            }else{
+                //if($sortieForm->get('annuler')->isClicked()){
+                    return $this->redirectToRoute('home');
+               // }
             }
-
-            $em->persist($sortie);
-            $em->flush();
         }
 
         return $this->render('sortie/addSortie.html.twig',[
@@ -211,37 +215,40 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route ("/test/{id}", name="sortie_test")
+     * @Route("/addParticipant/{id}", name="sortie_add_participant")
      */
-    public function test(EntityManagerInterface $em, Request $request, $id){
-        $sortieRepo = $em->getRepository(Sortie::class);
-        $sortie = $sortieRepo->find($id);
+    public function addParticipant(EntityManagerInterface $em, UserInterface $user, $id){
+        /* Récupération de la sortie */
+        $sortie = $em->getRepository(Sortie::class)->find($id);
 
-        /* Création du model */
-        $sortieFormulaire = new SortieFormulaire();
-        $sortieFormulaire->setNom($sortie->getNom());
-        $sortieFormulaire->setDateSortie($sortie->getDateHeureDebut());
-        $sortieFormulaire->setDateLimite($sortie->getDateLimiteInscription());
-        $sortieFormulaire->setNombrePlace($sortie->getNbInscriptionMax());
-        $sortieFormulaire->setDuree($sortie->getDuree());
-        $sortieFormulaire->setDescription($sortie->getInfosSortie());
-        $sortieFormulaire->setCampus($sortie->getCampus()->getNom());
-        $sortieFormulaire->setVille($sortie->getLieu()->getVille()->getNom());
-        $sortieFormulaire->setLieu($sortie->getLieu()->getNom());
-        $sortieFormulaire->setRue($sortie->getLieu()->getRue());
-        $sortieFormulaire->setCodePostal($sortie->getLieu()->getVille()->getCodePostal());
-        $sortieFormulaire->setLatitude($sortie->getLieu()->getLatitude());
-        $sortieFormulaire->setLongitude($sortie->getLieu()->getLongitude());
+        /* Récupération de l'utilisateur */
+        $participantRepo = $em->getRepository(Participant::class);
+        $participant = $participantRepo->findByUsername($user->getUsername());
+        $participantAAjouter = $participant[0];
 
-        $sortieForm = $this->createForm(SortieType::class, $sortieFormulaire, ['mode' => 'view']);
-        $sortieForm->handleRequest($request);
+        $sortie->addParticipant($participantAAjouter);
+        $em->persist($sortie);
+        $em->flush();
 
-        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-            
-        }
+        return $this->redirectToRoute('home');
+    }
 
-        return $this->render('sortie/test.html.twig', [
-            "sortieForm" => $sortieForm->createView()
-        ]);
+    /**
+     * @Route("/removeParticipant/{id}", name="sortie_remove_participant")
+     */
+    public function removeParticipant(EntityManagerInterface $em, UserInterface $user, $id){
+        /* Récupération de la sortie */
+        $sortie = $em->getRepository(Sortie::class)->find($id);
+
+        /* Récupération de l'utilisateur */
+        $participantRepo = $em->getRepository(Participant::class);
+        $participant = $participantRepo->findByUsername($user->getUsername());
+        $participantAAjouter = $participant[0];
+
+        $sortie->removeParticipant($participantAAjouter);
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
     }
 }

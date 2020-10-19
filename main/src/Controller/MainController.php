@@ -27,9 +27,7 @@ class MainController extends AbstractController
      */
     public function home(EntityManagerInterface $em, UserInterface $user, Request $request)
     {
-        /* Récupération de la liste des campus */
-        /*$campusRepo = $em->getRepository(Campus::class);
-        $campus = $campusRepo->findAll();
+        $isPresent = false;
 
         /* Récupération de la liste des sorties */
         $sortieRepo = $em->getRepository(Sortie::class);
@@ -71,7 +69,8 @@ class MainController extends AbstractController
             "user" => $user,
             "date" => $date,
             "listSortieForm" => $listeSortieForm->createView(),
-            "sorties" => $sorties
+            "sorties" => $sorties,
+            "isPresent" => $isPresent
 
         ]);
     }
