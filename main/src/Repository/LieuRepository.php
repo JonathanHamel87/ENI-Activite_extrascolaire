@@ -30,6 +30,16 @@ class LieuRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByNom($nom)
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.nom = :nom')
+            ->setParameter('nom', $nom)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Lieu

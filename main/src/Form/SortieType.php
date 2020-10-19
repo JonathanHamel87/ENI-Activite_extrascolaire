@@ -8,8 +8,10 @@ use App\Model\SortieFormulaire;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -228,7 +230,7 @@ class SortieType extends AbstractType
                         'class' => 'col-6',
                     ),
                 ])
-                ->add('campus', TextType::class, [
+                /*->add('campus', TextType::class, [
                     'label_attr' => array(
                         'class' => 'col-6'
                     ),
@@ -236,10 +238,22 @@ class SortieType extends AbstractType
                         'class' => 'col-6',
                     ),
                     'disabled' => true,
+                ])*/
+                ->add('enregistrer', SubmitType::class, [
+                    'attr' => array(
+                        'class' => 'btn btn-secondary'
+                    )
                 ])
-                ->add('enregistrer', ButtonType::class)
-                ->add('publier', ButtonType::class)
-                ->add('annuler', ButtonType::class)
+                ->add('publier', SubmitType::class, [
+                    'attr' => array(
+                        'class' => 'btn btn-secondary'
+                    )
+                ])
+                ->add('annuler', SubmitType::class, [
+                    'attr' => array(
+                        'class' => 'btn btn-secondary'
+                    )
+                ])
             ;
         }
 

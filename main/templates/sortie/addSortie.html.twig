@@ -13,7 +13,12 @@
       {{ form_row(sortieForm.description) }}
    </div>
    <div class="col-6">
-      {{ form_row(sortieForm.campus) }}
+      <div class="col-12 d-flex flex-row m-0 p-0 border-0">
+         <label class="col-6" for="ville">Campus :</label>
+         <select class="col-6" id="ville" name="ville" disabled>
+            <option id="{{ campus.id }}">{{ campus.nom }}</option>
+         </select>
+      </div>
       <div class="col-12 d-flex flex-row m-0 p-0 border-0">
          <label class="col-6" for="ville">Ville :</label>
          <select class="col-6" id="ville" name="ville">
@@ -29,7 +34,6 @@
                <option id="{{ lieu.id }}">{{ lieu.nom }}</option>
             {%  endfor %}
          </select>
-         <span>+</span>
       </div>
       <div class="col-12 d-flex flex-row m-0 p-0 border-0">
          <label class="col-6" for="rue">Rue :</label>
@@ -48,7 +52,7 @@
          <input class="col-6" id="longitude" name="longitude" value="{{ lieu.longitude }}">
       </div>
    </div>
-   <div>
+   <div class="d-flex flex-row justify-content-around offset-3 col-6 mt-4">
       {{ form_row(sortieForm.enregistrer) }}
       {{ form_row(sortieForm.publier) }}
       {{ form_row(sortieForm.annuler) }}

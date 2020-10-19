@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
@@ -67,6 +68,7 @@ class SortieController extends AbstractController
         /* Utilisateur connecté */
         $participantRepo = $em->getRepository(Participant::class);
         $participant = $participantRepo->findByUsername($user->getUsername());
+        $organisateur = $participant[0];
 
         /* Liste de ville */
         $villeRepo = $em->getRepository(Ville::class);
@@ -75,6 +77,9 @@ class SortieController extends AbstractController
         /* Liste de lieu */
         $lieuRepo = $em->getRepository(Lieu::class);
         $lieux = $lieuRepo->findByVille($villes[0]->getId());
+
+        /* Campus */
+        $campus = $organisateur->getCampus();
 
 
         /* Création du model */
@@ -85,11 +90,46 @@ class SortieController extends AbstractController
         $sortieForm = $this->createForm(SortieType::class, $sortieFormulaire, ['mode' => 'add']);
         $sortieForm->handleRequest($request);
 
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+            /* Récupération Lieu */
+            $lieu = $lieuRepo->findByNom($request->get('lieu'));
+
+            /* préparation de sortie avant flush */
+            $sortie->setNom($sortieForm->get('nom')->getViewData());
+            $sortie->setDateHeureDebut($sortieForm->get('dateSortie')->getData());
+            $sortie->setDateLimiteInscription($sortieForm->get('dateLimite')->getData());
+            $sortie->setNbInscriptionMax($sortieForm->get('nombrePlace')->getData());
+            $sortie->setDuree($sortieForm->get('duree')->getData());
+            $sortie->setInfosSortie($sortieForm->get('description')->getViewData());
+            $sortie->setCampus($campus);
+            $sortie->setLieu($lieu);
+            $sortie->setOrganisateur($organisateur);
+
+
+
+            if ($sortieForm->get('enregistrer')->isClicked()){
+                /* Définition état */
+                $etat = $em->getRepository(Etat::class)->find(1);
+                $sortie->setEtat($etat);
+            }else if ($sortieForm->get('publier')->isClicked()){
+                /* Définition état */
+                $etat = $em->getRepository(Etat::class)->find(2);
+                $sortie->setEtat($etat);
+                $sortie->addParticipant($organisateur);
+            }else if($sortieForm->get('annuler')->isClicked()){
+                return $this->redirectToRoute('home');
+            }
+
+            $em->persist($sortie);
+            $em->flush();
+        }
+
         return $this->render('sortie/addSortie.html.twig',[
             "sortieForm" => $sortieForm->createView(),
             "villes" => $villes,
             "lieux" => $lieux,
-            "lieu" => $lieux[0]
+            "lieu" => $lieux[0],
+            "campus" => $campus
         ]);
     }
 

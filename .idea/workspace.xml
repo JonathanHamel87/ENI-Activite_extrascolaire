@@ -19,25 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee893464-c375-458a-91bc-2edb6a9d6993" name="Default Changelist" comment="- Avancement des vues gestion des sorties&#10;&#10;Travail suivant :&#10;- Voir pour ajouter les event button dans le Form">
-      <change afterPath="$PROJECT_DIR$/main/src/Controller/LieuController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/src/Form/SortieType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/src/Model/SortieFormulaire.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/templates/lieu/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/templates/sortie/test.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/templates/ville/index.html.twig" afterDir="false" />
+    <list default="true" id="ee893464-c375-458a-91bc-2edb6a9d6993" name="Default Changelist" comment="- Mis en place des requête Ajax sur la vue de création de sortie.&#10;&#10;Travail suivant :&#10;- Animer les différents boutons pour la création.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/public/js/eventListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/public/js/eventListener.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Controller/SortieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Controller/SortieController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/Form/SortieViewType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/SortieViewType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/src/Form/SortieType.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Form/SortieType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/src/Repository/LieuRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/Repository/LieuRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/layout.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/home.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/homeOLD.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/profilOLD.html.twig" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/sortie/addSortie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/sortie/addSortie.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/sortie/sortie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/sortie/sortie.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/user/registerOld.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,9 +45,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="dummy://restClient/response14.html" root0="SKIP_INSPECTION" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -428,7 +412,8 @@
       <workItem from="1602825843834" duration="11008000" />
       <workItem from="1602844174624" duration="14220000" />
       <workItem from="1602947135755" duration="8363000" />
-      <workItem from="1603029053998" duration="19154000" />
+      <workItem from="1603029053998" duration="19294000" />
+      <workItem from="1603085753932" duration="3907000" />
     </task>
     <task id="LOCAL-00001" summary="- Création de la vue profil.html.twig&#10;- Mise en place du formulaire&#10;&#10;Travail suivant :&#10;- Animer le formulaire de profil.html.twig&#10;- Ajouter le système d'image&#10;- Mettre en place la méthode Post">
       <created>1601995663588</created>
@@ -472,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602948618324</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- Mis en place des requête Ajax sur la vue de création de sortie.&#10;&#10;Travail suivant :&#10;- Animer les différents boutons pour la création.">
+      <created>1603050058910</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1603050058910</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -498,7 +490,8 @@
     <MESSAGE value="- Mise en page des vue créer, modifier, afficher Sortie&#10;&#10;Travail suivant :&#10;- Trouver comment récupérer une liste d'objet lié à une entité" />
     <MESSAGE value="- Avancement des vues gestion des sorties&#10;&#10;Travail suivant :&#10;- Voir pour ajouter les event button dans le Form" />
     <MESSAGE value="- Correction d'une erreur de variable :&#10;username =&gt; pseudo&#10;password =&gt; motPasse" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Correction d'une erreur de variable :&#10;username =&gt; pseudo&#10;password =&gt; motPasse" />
+    <MESSAGE value="- Mis en place des requête Ajax sur la vue de création de sortie.&#10;&#10;Travail suivant :&#10;- Animer les différents boutons pour la création." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Mis en place des requête Ajax sur la vue de création de sortie.&#10;&#10;Travail suivant :&#10;- Animer les différents boutons pour la création." />
   </component>
   <component name="WindowStateProjectService">
     <state x="770" y="403" key="#Composer" timestamp="1601907347419">
@@ -524,22 +517,22 @@
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602590507614" />
     <state x="740" y="279" key="FileChooserDialogImpl/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1601987913973" />
-    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1603047164670">
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1603050079572">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.bottom/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603047164670" />
-    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1603047164669">
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603050079572" />
+    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1603050079572">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.center/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603047164669" />
-    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1603047164669">
+    <state width="1877" height="279" key="GridCell.Tab.0.center/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603050079572" />
+    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1603050079572">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.left/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603047164669" />
-    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1603047164669">
+    <state width="1877" height="279" key="GridCell.Tab.0.left/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603050079572" />
+    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1603050079572">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.right/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603047164669" />
+    <state width="1877" height="279" key="GridCell.Tab.0.right/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603050079572" />
     <state x="754" y="243" key="NewPhpClassDialog" timestamp="1602952032912">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -553,10 +546,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="0" y="161" key="SettingsEditor/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602592746589" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1602948624635">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603050063168">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1602948624635" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/-1920.1.1280.688/0.0.1920.1032@0.0.1920.1032" timestamp="1603050063168" />
     <state x="552" y="257" key="Vcs.Push.Dialog.v2/-1920.1.1280.699/0.0.1920.1048@0.0.1920.1048" timestamp="1602683899621" />
     <state x="802" y="411" width="316" height="244" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1602826408766">
       <screen x="0" y="0" width="1920" height="1048" />
