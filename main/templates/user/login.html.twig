@@ -24,6 +24,9 @@
                     <a class="alert-link" id="lost-password">Mot de passe oublié</a>
                 </div>
             </div>
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
         </form>
     </section>
 {% endblock %}

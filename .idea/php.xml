@@ -87,6 +87,8 @@
       <path value="$PROJECT_DIR$/main/vendor/symfony/validator" />
       <path value="$PROJECT_DIR$/main/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/main/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/main/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/main/vendor/doctrine/data-fixtures" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

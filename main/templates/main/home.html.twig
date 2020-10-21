@@ -6,7 +6,7 @@
         <!-- Bloc date + identifiant user connecter -->
         <div class="offset-9 col-3 offset-1">
             <p class="">Date du jour : {{ date.format('d/m/Y') }}</p>
-            <p class="">Participant: {{ user.prenom }} {{ user.nom }}</p>
+            <p class="">Participant:  {{ app.session.get('userActif').prenom }} {{ app.session.get('userActif').nom }}</p>
         </div>
 
         <h3 class="col-12">Filter les sorties</h3>
@@ -66,42 +66,44 @@
                 {% for sortie in sorties %}
                     <tr>
                         <td>{{ sortie.nom }}</td>
-                        <td>{{ sortie.dateHeureDebut|date("m/d/Y") }}</td>
-                        <td>{{ sortie.dateLimiteInscription|date("m/d/Y") }}</td>
+                        <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
+                        <td>{{ sortie.dateLimiteInscription|date("d/m/Y") }}</td>
                         <td>{{ sortie.participants|length }}/{{ sortie.nbInscriptionMax }}</td>
                         <td>{{ sortie.etat.libelle }}</td>
                         <td>
                             {% for participant in sortie.participants %}
-                                {% if participant.id == user.id %}
+                                {% if participant.id == app.session.get('userActif').id %}
                                     X
                                 {% endif %}
                             {% endfor %}
                         </td>
-                        <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|first }}.</td>
+                        <td><a href="{{ path('profil_show', {'id': sortie.organisateur.id}) }}">{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom|first }}.</a></td>
                         <td>
-                            {% if sortie.organisateur == user %}
+                            {% if sortie.organisateur == app.session.get('userActif') %}
                                 <a class="" href="{{ path('sortie_update', {'id': sortie.id})  }}">Modifier</a>
-                                {% if sortie.etat.id == 1 %}
+                                {% if sortie.etat.libelle == "Créée" %}
                                     <a class="" href="{{ path('sortie_publier', {'id': sortie.id})  }}">Publier</a>
                                 {% endif %}
-                                {% if sortie.etat.id == 1 or sortie.etat.id == 2 %}
+                                {% if sortie.etat.libelle == "Créée" or sortie.etat.libelle == "Ouverte" %}
                                     <a class="" href="{{ path('sortie_annuler', {'id': sortie.id})  }}">Annuler</a>
                                 {% endif %}
                             {% else %}
-                                {% if sortie.participants is empty %}
-                                    <a class="" href="{{ path('sortie_add_participant', {'id': sortie.id})  }}">S'inscrire</a>
-                                {% else %}
-                                    {% for participant in sortie.participants %}
-                                        {% if participant == user %}
-                                            {%  set isPresent = true %}
+                                    {% if sortie.etat.libelle == "Créée" or sortie.etat.libelle == "Ouverte" and sortie.dateLimiteInscription >= date.format('d/m/Y') %}
+                                        {% if sortie.participants is empty %}
+                                            <a class="" href="{{ path('sortie_add_participant', {'id': sortie.id})  }}">S'inscrire</a>
+                                        {% else %}
+                                            {% for participant in sortie.participants %}
+                                                {% if participant == app.session.get('userActif') %}
+                                                    {%  set isPresent = true %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if isPresent == true %}
+                                                <a class="" href="{{ path('sortie_remove_participant', {'id': sortie.id})  }}">Se désister</a>
+                                            {% else %}
+                                                <a class="" href="{{ path('sortie_add_participant', {'id': sortie.id})  }}">S'inscrire</a>
+                                            {% endif %}
                                         {% endif %}
-                                    {% endfor %}
-                                    {% if isPresent == true %}
-                                        <a class="" href="{{ path('sortie_remove_participant', {'id': sortie.id})  }}">Se désister</a>
-                                    {% else %}
-                                        <a class="" href="{{ path('sortie_add_participant', {'id': sortie.id})  }}">S'inscrire</a>
                                     {% endif %}
-                                {% endif %}
                             {% endif %}
                             <a class="" href="{{ path('sortie_view', {'id': sortie.id})  }}">Afficher</a>
                         </td>

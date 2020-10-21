@@ -1,0 +1,39 @@
+{%  extends 'layout.html.twig' %}
+
+{% block title %} Profil {% endblock %}
+{% block main %}
+    <h3 class="col-12 text-center mt-5">{{ username }}</h3>
+    <section class="d-flex flex-row">
+        <div class="col-2 offset-1">
+            <figure>
+                <img class="col-12" src="{{ source }}" alt="profil"/>
+            </figure>
+        </div>
+
+        {{ form_start(profilForm, {'attr': {'class': 'min-vh-section mt-5 col-7'}}) }}
+        <div class="offset-3 col-6 mt-2">
+            {{ form_row(profilForm.prenom) }}
+        </div>
+
+        <div class="offset-3 col-6 mt-2">
+            {{ form_row(profilForm.nom) }}
+        </div>
+
+        <div class="offset-3 col-6 mt-2">
+            {{ form_row(profilForm.telephone) }}
+        </div>
+
+        <div class="offset-3 col-6 mt-2">
+            {{ form_row(profilForm.mail) }}
+        </div>
+
+        <div class="offset-3 col-6 mt-2">
+            {{ form_row(profilForm.campus) }}
+        </div>
+
+        <div class="offset-3 col-6 d-flex justify-content-around mt-2">
+            {{ form_widget(profilForm.retour) }}
+        </div>
+        {{ form_end(profilForm) }}
+    </section>
+{% endblock %}

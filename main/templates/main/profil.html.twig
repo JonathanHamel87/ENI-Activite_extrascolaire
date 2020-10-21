@@ -12,42 +12,42 @@
 
                 {{ form_start(profilForm, {'attr': {'class': 'min-vh-section mt-5 col-7'}}) }}
                         <div class="offset-3 col-6 mt-2">
-                                {{ form_row(profilForm.username, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                                {{ form_row(profilForm.username) }}
                         </div>
 
                         <div class="offset-3 col-6 mt-2">
-                                {{ form_row(profilForm.nom, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                                {{ form_row(profilForm.nom) }}
                         </div>
 
                         <div class="offset-3 col-6 mt-2">
-                                {{ form_row(profilForm.prenom, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                                {{ form_row(profilForm.prenom) }}
                         </div>
 
                         <div class="offset-3 col-6 mt-2">
-                                {{ form_row(profilForm.telephone, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                                {{ form_row(profilForm.telephone) }}
                         </div>
 
                         <div class="offset-3 col-6 mt-2">
-                                {{ form_row(profilForm.mail, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                                {{ form_row(profilForm.mail) }}
                         </div>
 
                         <div class="offset-3 col-6 mt-2">
-                                {{ form_row(profilForm.password.first, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                                {{ form_row(profilForm.password.first) }}
                         </div>
                         <div class="offset-3 col-6 mt-2">
-                                {{ form_row(profilForm.password.second, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                                {{ form_row(profilForm.password.second) }}
                         </div>
                         <div class="offset-3 col-6 mt-2">
-                                {{ form_row(profilForm.campus, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}
+                                {{ form_row(profilForm.campus) }}
                         </div>
 
                         <div class="offset-3 col-6 mt-2 d-flex flex-row">
-                                {{ form_row(profilForm.photo, {'label_attr': {'class': 'col-5'}, 'attr': {'class': 'col-7'}}) }}</div>
+                                {{ form_row(profilForm.photo) }}</div>
                         </div>
 
                         <div class="offset-3 col-6 d-flex justify-content-around mt-2">
-                                {{ form_widget(profilForm.enregistrer, {'attr': {'class': 'btn btn-success'}}) }}
-                                {{ form_widget(profilForm.annuler, {'attr': {'class': 'btn btn-primary'}}) }}
+                                {{ form_widget(profilForm.enregistrer) }}
+                                {{ form_widget(profilForm.annuler) }}
                         </div>
                 {{ form_end(profilForm) }}
         </section>

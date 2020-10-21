@@ -2,23 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Entity\Ville;
-use App\Form\SortieAddType;
 use App\Form\SortieType;
 use App\Form\SortieUpdateType;
-use App\Form\SortieViewType;
 use App\Model\SortieFormulaire;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints\PositiveOrZero;
 
 /**
  * Class MainController
@@ -107,24 +103,31 @@ class SortieController extends AbstractController
                 $sortie->setOrganisateur($organisateur);
 
 
+                if($sortieForm->get('annuler')->isClicked()){
+                    return $this->redirectToRoute('home');
+                }
 
                 if ($sortieForm->get('enregistrer')->isClicked()){
                     /* Définition état */
                     $etat = $em->getRepository(Etat::class)->find(1);
                     $sortie->setEtat($etat);
+
+                    $em->persist($sortie);
+                    $em->flush();
+
                 }else if ($sortieForm->get('publier')->isClicked()){
                     /* Définition état */
                     $etat = $em->getRepository(Etat::class)->find(2);
                     $sortie->setEtat($etat);
-                    $sortie->addParticipant($organisateur);
+
+                    $em->persist($sortie);
+                    $em->flush();
                 }
 
-                $em->persist($sortie);
-                $em->flush();
             }else{
-                //if($sortieForm->get('annuler')->isClicked()){
+                if($sortieForm->get('annuler')->isClicked()){
                     return $this->redirectToRoute('home');
-               // }
+                }
             }
         }
 

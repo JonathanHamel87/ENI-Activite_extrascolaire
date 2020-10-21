@@ -7,8 +7,11 @@ use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
@@ -40,9 +43,19 @@ class UserController extends AbstractController
     /**
      * @Route ("/login", name="login")
      */
-    public function login()
+    public function login(AuthenticationUtils $authenticationUtils)
     {
-        return $this->render('user/login.html.twig', []);
+        $authError = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+        $error = '';
+
+        if (!$authError == null){
+            $error = "L'identifiant ou le mot de passe est invalide !";
+        }
+        return $this->render('user/login.html.twig', [
+            'pseudo' => $lastUsername,
+            'error' => $error
+        ]);
     }
 
     /**

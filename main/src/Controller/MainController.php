@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,7 +26,7 @@ class MainController extends AbstractController
     /**
      * @Route("", name="home")
      */
-    public function home(EntityManagerInterface $em, UserInterface $user, Request $request)
+    public function home(EntityManagerInterface $em, UserInterface $user, Request $request, Session $session)
     {
         $isPresent = false;
 
@@ -40,6 +41,8 @@ class MainController extends AbstractController
         $participantRepo = $em->getRepository(Participant::class);
         $participant = $participantRepo->findByUsername($user->getUsername());
         $user = $participant[0];
+
+        $session->set('userActif', $user);
 
         /* Formulaire listeSortie */
         $listeSortieForm = $this->createForm(ListSortieType::class);
@@ -58,15 +61,15 @@ class MainController extends AbstractController
             $campusId = $listeSortieForm->get('campus')->getViewData();
             $dateDebut = $listeSortieForm->get('firstDate')->getViewData();
             $dateFin = $listeSortieForm->get('secondeDate')->getViewData();
+            $organisateur = $listeSortieForm->get('bOrganisateur')->getData();
+            $inscrit = $listeSortieForm->get('bInscrit')->getData();
+            $nonInscrit = $listeSortieForm->get('bNonInscrit')->getData();
+            $sortieFini = $listeSortieForm->get('bFini')->getData();
 
-            $sorties = $sortieRepo->findByFilter($search, $campusId, $dateDebut, $dateFin);
-
+            $sorties = $sortieRepo->findByFilter($search, $campusId, $dateDebut, $dateFin, $organisateur, $inscrit, $nonInscrit, $sortieFini, $user->getId());
 
         }
-
-
         return $this->render("main/home.html.twig", [
-            "user" => $user,
             "date" => $date,
             "listSortieForm" => $listeSortieForm->createView(),
             "sorties" => $sorties,
@@ -78,14 +81,13 @@ class MainController extends AbstractController
     /**
      * @Route("/profil", name="profil")
      */
-    public function profil(Request $request, SluggerInterface $slugger, EntityManagerInterface $em, UserInterface $user, UserPasswordEncoderInterface $encoder){
+    public function profil(Request $request, Session $session, UserInterface $test, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder){
 
         /* Utilisateur connecté */
         $participantRepo = $em->getRepository(Participant::class);
-        $participant = $participantRepo->findByUsername($user->getUsername());
+        $participant = $participantRepo->findByUsername($test->getUsername());
         $user = $participant[0];
         $source = 'uploads/img/'.$user->getId().'.jpeg';
-
 
         /* Formulaire profil */
         $profilForm = $this->createForm(ProfilType::class, $user);
@@ -118,6 +120,8 @@ class MainController extends AbstractController
             $em->persist($user);
             $em->flush();
 
+            $session->set('userActif', $user);
+
         }
 
         return $this->render('main/profil.html.twig',[
@@ -144,13 +148,42 @@ class MainController extends AbstractController
                     )
                 );
             }
-            $manager->persist($user);
-            $manager->flush();
+            $em->persist($user);
+            $em->flush();
+
+            $session->set('userActif', $user);
+
             $this->addFlash('success', 'Votre profil a été modifié avec succès!' );
             //return $this->redirectToRoute('profil');
         }else{
             $this->addFlash('warning', 'Une erreur est arrivée' );
         }
+    }
+
+    /**
+     * @Route("/profil/show/{id}", name="profil_show")
+     */
+    public function profilShow(Request $request, EntityManagerInterface $em, $id){
+
+        /* Utilisateur connecté */
+        $participantRepo = $em->getRepository(Participant::class);
+        $participant = $participantRepo->find($id);
+
+        $source = '/uploads/img/'.$participant->getId().'.jpeg';
+
+        /* Formulaire profil */
+        $profilForm = $this->createForm(ProfilType::class, $participant, ['mode' => 'show']);
+        $profilForm->handleRequest($request);
+
+        if ($profilForm->isSubmitted()){
+            $this->redirectToRoute('home');
+        }
+
+        return $this->render('main/profilShow.html.twig',[
+            "profilForm" => $profilForm->createView(),
+            "source" => $source,
+            "username" => $participant->getPseudo()
+        ]);
     }
 
 }

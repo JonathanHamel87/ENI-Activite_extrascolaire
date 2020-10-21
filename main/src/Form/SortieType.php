@@ -33,7 +33,7 @@ class SortieType extends AbstractType
                     'disabled' => true,
                 ])
                 ->add('dateSortie', DateType::class, [
-                    'label' => "Date limite d'inscription",
+                    'label' => "Date et heure de la sortie",
                     'widget' => 'single_text',
                     'format' => 'dd/MM/yy hh:mm',
                     'html5' => false,
@@ -164,7 +164,7 @@ class SortieType extends AbstractType
                     ),
                 ])
                 ->add('dateSortie', DateType::class, [
-                    'label' => "Date limite d'inscription",
+                    'label' => "Date et heure de la sortie",
                     'widget' => 'single_text',
                     'format' => 'dd/MM/yy hh:mm',
                     'html5' => false,
@@ -226,7 +226,7 @@ class SortieType extends AbstractType
                         'class' => 'btn btn-secondary'
                     )
                 ])
-                ->add('annuler', ButtonType::class, [
+                ->add('annuler', SubmitType::class, [
                     'attr' => array(
                         'class' => 'btn btn-secondary btn-annuler',
                     )

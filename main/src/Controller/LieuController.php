@@ -24,7 +24,7 @@ class LieuController extends AbstractController
      */
     public function index()
     {
-        return $this->render('lieu/index.html.twig', [
+        return $this->render('lieu/ville.html.twig', [
             'controller_name' => 'LieuController',
         ]);
     }

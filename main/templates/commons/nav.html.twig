@@ -6,12 +6,14 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="">Villes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Campus</a>
-                </li>
+                {%  if app.session.get('userActif').administrateur == true %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_ville') }}">Villes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin_campus') }}">Campus</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('home') }}">Accueil</a>
                 </li>

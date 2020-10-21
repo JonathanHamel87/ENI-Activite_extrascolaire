@@ -1,0 +1,48 @@
+GET http://activite-extrascolaire:8080/lieu/recupLieu?id=1
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-10-18T085214.200.html
+
+###
+
+GET http://activite-extrascolaire:8080/lieu/recupLieux?id=1
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-10-18T085125.200.html
+
+###
+
+GET http://localhost:8080/lieu/recupLieu?id=1
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-10-18T085110.404.html
+
+###
+
+GET http://localhost:8080/lieu/recupLieu?id=1
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-10-18T085039.404.html
+
+###
+
+GET http://localhost:8080/lieu/recupLieux?id=1
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-10-18T085001.404.html
+
+###
+
+GET http://activite-extrascolaire:8080/lieu/recupLieux?id=1
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-10-18T084900.200.html
+
+###
+
